@@ -73,10 +73,10 @@ class Ship:
 # Settings Variables
 
 
-row_size = 9  # number of rows
-col_size = 9  # number of columns
+row_size = 10  # number of rows
+col_size = 10  # number of columns
 num_ships = 4
-max_ship_size = 5
+max_ship_size = 4
 min_ship_size = 2
 num_turns = 40
 
