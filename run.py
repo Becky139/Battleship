@@ -2,6 +2,8 @@ from random import randint
 import os
 
 #Ship Class
+
+
 class Ship:
   def __init__(self, size, orientation, location):
     self.size = size
@@ -65,6 +67,8 @@ class Ship:
 
   
 #Settings Variables
+
+
 row_size = 9 #number of rows
 col_size = 9 #number of columns
 num_ships = 4
@@ -73,6 +77,8 @@ min_ship_size = 2
 num_turns = 40
 
 #Create lists
+
+
 ship_list = []
 
 board = [[0] * col_size for x in range(row_size)]
@@ -80,6 +86,8 @@ board = [[0] * col_size for x in range(row_size)]
 board_display = [["O"] * col_size for x in range(row_size)]
 
 #Functions
+
+
 def print_board(board_array):
   print("\n  " + " ".join(str(x) for x in range(1, col_size + 1)))
   for r in range(row_size):
@@ -145,6 +153,7 @@ def get_col():
 
 # Create the ships
 
+
 temp = 0
 while temp < num_ships:
   ship_info = random_location()
@@ -156,6 +165,8 @@ while temp < num_ships:
 del temp
 
 # Play Game
+
+
 os.system('clear')
 print_board(board_display)
 
@@ -196,6 +207,8 @@ for turn in range(num_turns):
     break
 
 # End Game
+
+
 if ship_list:
   print("You lose!")
 else:
