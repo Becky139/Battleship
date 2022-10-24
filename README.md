@@ -113,13 +113,12 @@ The project will be deployed to a Heroku terminal. There will be no styling asid
 
 
 #### Skeleton
-A flowchart was created to show the logic the functions would follow. This flowchart was created using the flowcharts template on [Lucid](https://lucid.app/).
-
+A flowchart was created to show the logic the functions would follow.
 
 <details>
 <summary>Lucid Flowchart</summary>
     
-![Lucid Flowchart](readme_files/)
+![Lucid Flowchart](assets/readme_files/battleship_chart.png)
 
 </details>
 
