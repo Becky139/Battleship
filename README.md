@@ -1,8 +1,8 @@
-# Funny Bones
+# Battleship Game
 
-![Funny Bones Mockup Images](readme_files/Images/responsive.PNG)
+![Battleship Mockup Images](readme_files/Images/responsive.PNG)
 
-[View the live project here](https://funny-bones.herokuapp.com/)
+[View the live project here]()
 
 ## Table of contents
 1. [Introduction](#Introduction)
@@ -37,7 +37,9 @@
 
 ## Introduction
 
-For the Portfolio Project 3 - Python Essentials, the developer decided to build a 
+For the Portfolio Project 3 - Python Essentials, the developer decided to build a battleship game. Battleship (also known as Battleships or Sea Battle is a strategy type guessing game for two players. It is played on ruled grids (paper or board) on which each player's fleet of warships are marked. The locations of the fleets are concealed from the other player. Players alternate turns calling "shots" at the other player's ships, and the objective of the game is to destroy the opposing player's fleet.
+
+Battleship is known worldwide as a pencil and paper game which dates from World War I. It was published by various companies as a pad-and-pencil game in the 1930s and was released as a plastic board game by Milton Bradley in 1967. The game has spawned electronic versions, video games, smart device apps and a film.
 
 [Back to top ⇧](#)
 
@@ -51,13 +53,13 @@ The ideal user for this website is:
 
 #### New User Goals
 1. As a new user, I want to see clear instructions for gameplay. 
-2. As a new user, I want to see a visual representation of my remaining lives.
+2. As a new user, I want to see a visual representation of my remaining Shots.
 3. As a new user, I want the ability to replay the game.
 
 #### Current User
 1. As a current user, I want the ability to replay the game.
-2. As a current user, I want the guess word to follow a certain theme.
-3. As a current user, I want the choice to use different themes. 
+2. As a current user, I want the guess and hit the various ships.
+3. As a current user, I want the choice to use different ship sizes. 
 
 
 ### Development-Planes
@@ -77,7 +79,8 @@ Strategy incorporates user needs as well as product objectives. This website wil
 - **Psychographic:**
     - Lifestyles:
         - Interest in games
-        - Interest in Halloween
+        - Interest in battles
+        - Intrest in Ships
         - Interest in puzzles
     - Personality/Attitudes:
         - Focused
@@ -85,17 +88,11 @@ Strategy incorporates user needs as well as product objectives. This website wil
         - Creative
     
 The application needs to enable the **user** to:
-- play the game "Funny Bones" using only alpha characters.
-- generate a new word on each play-through by sourcing a random word from an external list of words.
+- play the game "Battleship" using alpha characters and numbers.
+- generate a random board on each play-through placeing ships in differant locations.
     
-With the above information in mind, a strategy table was created to show the trade-offs between what is important and what is viable with the following results.
 
-<details>
-<summary>Strategy Plane - Viability/Feasibility Table</summary>
 
-![Strategy Table](readme_files/flowcharts_and_tables/strategy_table.PNG)
-
-</details>
 
 
 #### Scope
@@ -122,7 +119,7 @@ A flowchart was created to show the logic the functions would follow. This flowc
 <details>
 <summary>Lucid Flowchart</summary>
     
-![Lucid Flowchart](readme_files/flowcharts_and_tables/)
+![Lucid Flowchart](readme_files/)
 
 </details>
 
@@ -136,15 +133,10 @@ A flowchart was created to show the logic the functions would follow. This flowc
 
 ## Features
 ### Existing Features
-- **Input Bar** - To progress the game, the user will use the input bar to input their next guess, either a letter or word.
-- **Replay Choice** - At the end of each game, win or lose, the user will be offered the choice to play again by entering either Y (yes) or any other character to end the game.
-- **Visual Representation of Lives Remaining** - Each time the user enters an incorrect guess, a section of Funny Bones the skeleton will appear. When Funny Bones is completed, the game is lost.
-- **Instructions and Introduction** - At the beginning of each game, a brief introduction to Funny Bones and the instructions are shown, telling the user how to play the game.
+
 
 ### Features to Implement in the future
-- **Additional Themes**
-     - **Feature** - A set of additional themes will be available to the user to play.
-     - **Reason for not featuring in this release** - A lack of experience and time prevented the developer from making this feature upon release. This feature will be developed and implemented in the future to improve repeat play by users.
+
 
 [Back to top ⇧](#)
 
