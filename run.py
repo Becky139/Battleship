@@ -1,263 +1,202 @@
-import random
-import time
+from random import randint
+import os
 
-"""
-    -------BATTLESHIPS-------
-    Pre-reqs: Loops, Strings, Arrays, 2D Arrays, Global Variables, Methods
-    How it will work:
-    1. A 10x10 grid will have 8 ships of variable length randomly placed about
-    2. You will have 50 bullets to take down the ships that are placed down
-    3. You can choose a row and column such as A3 to indicate where to shoot
-    4. For every shot that hits or misses it will show up in the grid
-    5. A ship cannot be placed diagonally, so if a shot hits the rest of
-        the ship is in one of 4 directions, left, right, up, and down
-    6. If all ships are unearthed before using up all bullets, you win
-        else, you lose
-    Legend:
-    1. "." = water or empty space
-    2. "O" = part of ship
-    3. "X" = part of ship that was hit with bullet
-    4. "#" = water that was shot with bullet, a miss because it hit no ship
-"""
+#Ship Class
+class Ship:
+  def __init__(self, size, orientation, location):
+    self.size = size
+    
+    if orientation == 'horizontal' or orientation == 'vertical':
+      self.orientation = orientation
+    else:
+      raise ValueError("Value must be 'horizontal' or 'vertical'.")
+    
+    if orientation == 'horizontal':
+      if location['row'] in range(row_size):
+        self.coordinates = []
+        for index in range(size):
+          if location['col'] + index in range(col_size):
+            self.coordinates.append({'row': location['row'], 'col': location['col'] + index})
+          else:
+            raise IndexError("Column is out of range.")
+      else:
+        raise IndexError("Row is out of range.")
+    elif orientation == 'vertical':
+      if location['col'] in range(col_size):
+        self.coordinates = []
+        for index in range(size):
+          if location['row'] + index in range(row_size):
+            self.coordinates.append({'row': location['row'] + index, 'col': location['col']})
+          else:
+            raise IndexError("Row is out of range.")
+      else:
+        raise IndexError("Column is out of range.")
 
-# Global variable for grid
-grid = [[]]
-# Global variable for grid size
-grid_size = 10
-# Global variable for number of ships to place
-num_of_ships = 2
-# Global variable for bullets left
-bullets_left = 50
-# Global variable for game over
-game_over = False
-# Global variable for number of ships sunk
-num_of_ships_sunk = 0
-# Global variable for ship positions
-ship_positions = [[]]
-# Global variable for alphabet
-alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    if self.filled():
+      print_board(board)
+      print(" ".join(str(coords) for coords in self.coordinates))
+      raise IndexError("A ship already occupies that space.")
+    else:
+      self.fillBoard()
+  
+  def filled(self):
+    for coords in self.coordinates:
+      if board[coords['row']][coords['col']] == 1:
+        return True
+    return False
+  
+  def fillBoard(self):
+    for coords in self.coordinates:
+      board[coords['row']][coords['col']] = 1
 
-
-def validate_grid_and_place_ship(start_row, end_row, start_col, end_col):
-    """Will check the row or column to see if it is safe to place a ship there"""
-    global grid
-    global ship_positions
-
-    all_valid = True
-    for r in range(start_row, end_row):
-        for c in range(start_col, end_col):
-            if grid[r][c] != ".":
-                all_valid = False
-                break
-    if all_valid:
-        ship_positions.append([start_row, end_row, start_col, end_col])
-        for r in range(start_row, end_row):
-            for c in range(start_col, end_col):
-                grid[r][c] = "O"
-    return all_valid
-
-
-def try_to_place_ship_on_grid(row, col, direction, length):
-    """Based on direction will call helper method to try and place a ship on the grid"""
-    global grid_size
-
-    start_row, end_row, start_col, end_col = row, row + 1, col, col + 1
-    if direction == "left":
-        if col - length < 0:
-            return False
-        start_col = col - length + 1
-
-    elif direction == "right":
-        if col + length >= grid_size:
-            return False
-        end_col = col + length
-
-    elif direction == "up":
-        if row - length < 0:
-            return False
-        start_row = row - length + 1
-
-    elif direction == "down":
-        if row + length >= grid_size:
-            return False
-        end_row = row + length
-
-    return validate_grid_and_place_ship(start_row, end_row, start_col, end_col)
-
-
-def create_grid():
-    """Will create a 10x10 grid and randomly place down ships
-       of different sizes in different directions"""
-    global grid
-    global grid_size
-    global num_of_ships
-    global ship_positions
-
-    random.seed(time.time())
-
-    rows, cols = (grid_size, grid_size)
-
-    grid = []
-    for r in range(rows):
-        row = []
-        for c in range(cols):
-            row.append(".")
-        grid.append(row)
-
-    num_of_ships_placed = 0
-
-    ship_positions = []
-
-    while num_of_ships_placed != num_of_ships:
-        random_row = random.randint(0, rows - 1)
-        random_col = random.randint(0, cols - 1)
-        direction = random.choice(["left", "right", "up", "down"])
-        ship_size = random.randint(3, 5)
-        if try_to_place_ship_on_grid(random_row, random_col, direction, ship_size):
-            num_of_ships_placed += 1
-
-
-def print_grid():
-    """Will print the grid with rows A-J and columns 0-9"""
-    global grid
-    global alphabet
-
-    debug_mode = True
-
-    alphabet = alphabet[0: len(grid) + 1]
-
-    for row in range(len(grid)):
-        print(alphabet[row], end=") ")
-        for col in range(len(grid[row])):
-            if grid[row][col] == "O":
-                if debug_mode:
-                    print("O", end=" ")
-                else:
-                    print(".", end=" ")
-            else:
-                print(grid[row][col], end=" ")
-        print("")
-
-    print("  ", end=" ")
-    for i in range(len(grid[0])):
-        print(str(i), end=" ")
-    print("")
-
-
-def accept_valid_bullet_placement():
-    """Will get valid row and column to place bullet shot"""
-    global alphabet
-    global grid
-
-    is_valid_placement = False
-    row = -1
-    col = -1
-    while is_valid_placement is False:
-        placement = input("Enter row (A-J) and column (0-9) such as A3: ")
-        placement = placement.upper()
-        if len(placement) <= 0 or len(placement) > 2:
-            print("Error: Please enter only one row and column such as A3")
-            continue
-        row = placement[0]
-        col = placement[1]
-        if not row.isalpha() or not col.isnumeric():
-            print("Error: Please enter letter (A-J) for row and (0-9) for column")
-            continue
-        row = alphabet.find(row)
-        if not (-1 < row < grid_size):
-            print("Error: Please enter letter (A-J) for row and (0-9) for column")
-            continue
-        col = int(col)
-        if not (-1 < col < grid_size):
-            print("Error: Please enter letter (A-J) for row and (0-9) for column")
-            continue
-        if grid[row][col] == "#" or grid[row][col] == "X":
-            print("You have already shot a bullet here, pick somewhere else")
-            continue
-        if grid[row][col] == "." or grid[row][col] == "O":
-            is_valid_placement = True
-
-    return row, col
-
-
-def check_for_ship_sunk(row, col):
-    """If all parts of a shit have been shot it is sunk and we later increment ships sunk"""
-    global ship_positions
-    global grid
-
-    for position in ship_positions:
-        start_row = position[0]
-        end_row = position[1]
-        start_col = position[2]
-        end_col = position[3]
-        if start_row <= row <= end_row and start_col <= col <= end_col:
-            # Ship found, now check if its all sunk
-            for r in range(start_row, end_row):
-                for c in range(start_col, end_col):
-                    if grid[r][c] != "X":
-                        return False
+  def contains(self, location):
+    for coords in self.coordinates:
+      if coords == location:
+        return True
+    return False
+  
+  def destroyed(self):
+    for coords in self.coordinates:
+      if board_display[coords['row']][coords['col']] == 'O':
+        return False
+      elif board_display[coords['row']][coords['col']] == '*':
+        raise RuntimeError("Board display inaccurate")
     return True
 
+  
+#Settings Variables
+row_size = 9 #number of rows
+col_size = 9 #number of columns
+num_ships = 4
+max_ship_size = 5
+min_ship_size = 2
+num_turns = 40
 
-def shoot_bullet():
-    """Updates grid and ships based on where the bullet was shot"""
-    global grid
-    global num_of_ships_sunk
-    global bullets_left
+#Create lists
+ship_list = []
 
-    row, col = accept_valid_bullet_placement()
-    print("")
-    print("----------------------------")
+board = [[0] * col_size for x in range(row_size)]
 
-    if grid[row][col] == ".":
-        print("You missed, no ship was shot")
-        grid[row][col] = "#"
-    elif grid[row][col] == "O":
-        print("You hit!", end=" ")
-        grid[row][col] = "X"
-        if check_for_ship_sunk(row, col):
-            print("A ship was completely sunk!")
-            num_of_ships_sunk += 1
-        else:
-            print("A ship was shot")
+board_display = [["O"] * col_size for x in range(row_size)]
 
-    bullets_left -= 1
+#Functions
+def print_board(board_array):
+  print("\n  " + " ".join(str(x) for x in range(1, col_size + 1)))
+  for r in range(row_size):
+    print(str(r + 1) + " " + " ".join(str(c) for c in board_array[r]))
+  print()
 
+def search_locations(size, orientation):
+  locations = []
 
-def check_for_game_over():
-    """If all ships have been sunk or we run out of bullets its game over"""
-    global num_of_ships_sunk
-    global num_of_ships
-    global bullets_left
-    global game_over
+  if orientation != 'horizontal' and orientation != 'vertical':
+    raise ValueError("Orientation must have a value of either 'horizontal' or 'vertical'.")
 
-    if num_of_ships == num_of_ships_sunk:
-        print("Congrats you won!")
-        game_over = True
-    elif bullets_left <= 0:
-        print("Sorry, you lost! You ran out of bullets, try again next time!")
-        game_over = True
+  if orientation == 'horizontal':
+    if size <= col_size:
+      for r in range(row_size):
+        for c in range(col_size - size + 1):
+          if 1 not in board[r][c:c+size]:
+            locations.append({'row': r, 'col': c})
+  elif orientation == 'vertical':
+    if size <= row_size:
+      for c in range(col_size):
+        for r in range(row_size - size + 1):
+          if 1 not in [board[i][c] for i in range(r, r+size)]:
+            locations.append({'row': r, 'col': c})
 
+  if not locations:
+    return 'None'
+  else:
+    return locations
 
-def main():
-    """Main entry point of application that runs the game loop"""
-    global game_over
+def random_location():
+  size = randint(min_ship_size, max_ship_size)
+  orientation = 'horizontal' if randint(0, 1) == 0 else 'vertical'
 
-    print("-----Welcome to Battleships-----")
-    print("You have 50 bullets to take down 8 ships, may the battle begin!")
+  locations = search_locations(size, orientation)
+  if locations == 'None':
+    return 'None'
+  else:
+    return {'location': locations[randint(0, len(locations) - 1)], 'size': size,\
+     'orientation': orientation}
 
-    create_grid()
+def get_row():
+  while True:
+    try:
+      guess = int(input("Row Guess: "))
+      if guess in range(1, row_size + 1):
+        return guess - 1
+      else:
+        print("\nOops, that's not even in the ocean.")
+    except ValueError:
+      print("\nPlease enter a number")
 
-    while game_over is False:
-        print_grid()
-        print("Number of ships remaining: " + str(num_of_ships - num_of_ships_sunk))
-        print("Number of bullets left: " + str(bullets_left))
-        shoot_bullet()
-        print("----------------------------")
-        print("")
-        check_for_game_over()
+def get_col():
+  while True:
+    try:
+      guess = int(input("Column Guess: "))
+      if guess in range(1, col_size + 1):
+        return guess - 1
+      else:
+        print("\nOops, that's not even in the ocean.")
+    except ValueError:
+      print("\nPlease enter a number")
 
+# Create the ships
 
-if __name__ == '__main__':
-    """Will only be called when program is run from terminal or an IDE like PyCharms"""
-    main()
+temp = 0
+while temp < num_ships:
+  ship_info = random_location()
+  if ship_info == 'None':
+    continue
+  else:
+    ship_list.append(Ship(ship_info['size'], ship_info['orientation'], ship_info['location']))
+    temp += 1
+del temp
+
+# Play Game
+os.system('clear')
+print_board(board_display)
+
+for turn in range(num_turns):
+  print("Turn:", turn + 1, "of", num_turns)
+  print("Ships left:", len(ship_list))
+  print()
+  
+  guess_coords = {}
+  while True:
+    guess_coords['row'] = get_row()
+    guess_coords['col'] = get_col()
+    if board_display[guess_coords['row']][guess_coords['col']] == 'X' or \
+     board_display[guess_coords['row']][guess_coords['col']] == '*':
+      print("\nYou guessed that one already.")
+    else:
+      break
+
+  os.system('clear')
+
+  ship_hit = False
+  for ship in ship_list:
+    if ship.contains(guess_coords):
+      print("Hit!")
+      ship_hit = True
+      board_display[guess_coords['row']][guess_coords['col']] = 'X'
+      if ship.destroyed():
+        print("Ship Destroyed!")
+        ship_list.remove(ship)
+      break
+  if not ship_hit:
+    board_display[guess_coords['row']][guess_coords['col']] = '*'
+    print("You missed!")
+
+  print_board(board_display)
+  
+  if not ship_list:
+    break
+
+# End Game
+if ship_list:
+  print("You lose!")
+else:
+  print("All the ships are sunk. You win!")
