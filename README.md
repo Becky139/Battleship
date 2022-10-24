@@ -100,7 +100,7 @@ The scope plane is about defining requirements based on the goals established on
 - Content Requirements:
     - The user will be looking for:
         - Clear and concise instructions.
-        - A consistent theme, such as Halloween 
+        - A consistent theme, and game play. 
 - Functionality Requirements:
     - The user will be able to:
         - Enter either a letter or a whole word if they think they know it.
@@ -116,9 +116,9 @@ The project will be deployed to a Heroku terminal. There will be no styling asid
 A flowchart was created to show the logic the functions would follow.
 
 <details>
-<summary>Lucid Flowchart</summary>
+<summary>Flowchart</summary>
     
-![Lucid Flowchart](assets/readme_files/battleship_chart.png)
+![Flowchart](assets/readme_files/battleship_chart.png)
 
 </details>
 
@@ -144,7 +144,7 @@ A flowchart was created to show the logic the functions would follow.
 ## Issues and Bugs 
 The developer ran into several issues during the development of the website, with the noteworthy ones listed below, along with solutions or ideas to implement in the future.
 
-
+bug requirements
 
 
 
