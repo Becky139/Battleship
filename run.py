@@ -1,37 +1,27 @@
 from random import randint
 import os
 
-def clear_console():
-    """
-    Clears the console.
-    """
-    # This line is credited to
-    # https://stackoverflow.com/questions/2084508/clear-terminal-in-python
-    os.system('cls' if os.name == 'nt' else 'clear')
+def print_welcome():
+    print("\n~~~~~~~~~~~ LET'S PLAY BATTLESHIP! ~~~~~~~~~~~\n")
+    print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
+    print('* Welcome. I hope you will enjoy this basic battleship game.')
+    print('* Please take a second to read what you need to know to play.')
+    print('* Ship sizes are 1 x 1. However, ships can be next to one another.')
+    print('* Ships can be duplicate. So, if all your ships are sunken and you')
+    print('* do not get the message "You sank my battleships", you need to')
+    print('* target one of your sunken ships again.')
+    print('* You can set the size of the board.')
+    print("* You'll see the number of ships remaining.")
+    print("* You'll see the number of guesses remaining after the first shot.")
+    print('* If you miss, the missed shot displays as an X on the board.')
+    print('* If you hit, the sunken ship displays as an H on the board.')
+    print('* When you ran out of guesses and there are still ships on the')
+    print('* board, you lose and the game ends.')
+    print('* When you sank all the ships, you win and the game is over.')
+    print('* Click on the red Run Program button to restart the game.')
 
 
-def welcome():
-    """
-    Displays the welcome message.
-    Directs user to create user or log in functions
-    """
-    clear_console()
-    print(BR * 4)
-    print(C('Welcome to BATTLESHIP!'))
-    print(BR * 4)
-    user_choice = input(' ' * 25 + 'Have you played before? Y/N: ').strip()
-    if user_choice.upper() == 'Y':
-        clear_console()
-        login()
-    elif user_choice.upper() == 'N':
-        clear_console()
-        create_user(0)
-    else:
-        clear_console()
-        print(BR * 8)
-        print(C('You must choose either Y or N.'))
-        time.sleep(3)
-        welcome()
+print_welcome()
 
 #Ship Class
 class Ship:
