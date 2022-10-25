@@ -1,235 +1,385 @@
-from random import randint
-import os
+# Libraries
+import random
+import time
 
-def print_welcome():
-    print("\n~~~~~~~~~~~ LET'S PLAY BATTLESHIP! ~~~~~~~~~~~\n")
-    print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
-    print('* Welcome. I hope you will enjoy this basic battleship game.')
-    print('* Please take a second to read what you need to know to play.')
-    print('* Ship sizes are 1 x 1. However, ships can be next to one another.')
-    print('* Ships can be duplicate. So, if all your ships are sunken and you')
-    print('* do not get the message "You sank my battleships", you need to')
-    print('* target one of your sunken ships again.')
-    print('* You can set the size of the board.')
-    print("* You'll see the number of ships remaining.")
-    print("* You'll see the number of guesses remaining after the first shot.")
-    print('* If you miss, the missed shot displays as an X on the board.')
-    print('* If you hit, the sunken ship displays as an H on the board.')
-    print('* When you ran out of guesses and there are still ships on the')
-    print('* board, you lose and the game ends.')
-    print('* When you sank all the ships, you win and the game is over.')
-    print('* Click on the red Run Program button to restart the game.')
+# Player and computer board variables
+PLAYER_BOARD = [[" "] * 8 for i in range(8)]
+COMPUTER_BOARD = [[" "] * 8 for i in range(8)]
+PLAYER_GUESS_BOARD = [[" "] * 8 for i in range(8)]
+COMPUTER_GUESS_BOARD = [[" "] * 8 for i in range(8)]
+
+# The SHIP_LENGTHS list contains the length of each ship on the board
+SHIP_LENGTHS = [2, 3, 3, 4, 5]
+
+# The letters_conversion dictionary assigns letters to numbers that can be
+# used for ship placements
+letters_conversion = {
+    'A': 0,
+    'B': 1,
+    'C': 2,
+    'D': 3,
+    'E': 4,
+    'F': 5,
+    'G': 6,
+    'H': 7
+}
+
+# The PHASE variable prints "=" 80 times as a line break.
+PHASE = "=" * 80
 
 
-print_welcome()
+def welcome_message():
+    """
+    The welcome_message function displays a welcome message every new game
+    """
+    print("""\
+    \u001b[32m
+  ____        _   _   _           _     _           
+ |  _ \      | | | | | |         | |   (_)          
+ | |_) | __ _| |_| |_| | ___  ___| |__  _ _ __  ___ 
+ |  _ < / _` | __| __| |/ _ \/ __| '_ \| | '_ \/ __|
+ | |_) | (_| | |_| |_| |  __/\__ \ | | | | |_) \__ |
+ |____/ \__,_|\__|\__|_|\___||___/_| |_|_| .__/|___/
+                                         | |        
+                                         |_| 
+\u001b[0m       
+""")
 
-#Ship Class
-class Ship:
-  def __init__(self, size, orientation, location):
-    self.size = size
-    
-    if orientation == 'horizontal' or orientation == 'vertical':
-      self.orientation = orientation
-    else:
-      raise ValueError("Value must be 'horizontal' or 'vertical'.")
-    
-    if orientation == 'horizontal':
-      if location['row'] in range(row_size):
-        self.coordinates = []
-        for index in range(size):
-          if location['col'] + index in range(col_size):
-            self.coordinates.append({'row': location['row'], 'col': location['col'] + index})
-          else:
-            raise IndexError("Column is out of range.")
-      else:
-        raise IndexError("Row is out of range.")
-    elif orientation == 'vertical':
-      if location['col'] in range(col_size):
-        self.coordinates = []
-        for index in range(size):
-          if location['row'] + index in range(row_size):
-            self.coordinates.append({'row': location['row'] + index, 'col': location['col']})
-          else:
-            raise IndexError("Row is out of range.")
-      else:
-        raise IndexError("Column is out of range.")
+    # Welcome Message
+    print("\nWelcome To Battleships!\n")
+    print("THE BOARD IS A GRID OF 8x8 WITH FIVE SHIPS TO SINK")
+    print("\u001b[32mCARRIER - \u001b[33mBATTLESHIP - \
+\u001b[34mCRUISER - \u001b[35mSUBMARINE - \u001b[36mDESTROYER\
+    \u001b[0m")
+    print("EACH PLAYER HAS 17 LIVES, \
+THE FIRST TO STRIKE 17 BLOWS TO THE ENEMYS SHIPS WINS\n")
+    time.sleep(5)
+    print(PHASE)
 
-    if self.filled():
-      print_board(board)
-      print(" ".join(str(coords) for coords in self.coordinates))
-      raise IndexError("A ship already occupies that space.")
-    else:
-      self.fillBoard()
-  
-  def filled(self):
-    for coords in self.coordinates:
-      if board[coords['row']][coords['col']] == 1:
-        return True
-    return False
-  
-  def fillBoard(self):
-    for coords in self.coordinates:
-      board[coords['row']][coords['col']] = 1
+    # Instructions
+    print("\u001b[31mINSTRUCTIONS:\u001b[0m \n")
+    print("THE FIRST PLAYER TO GET A HIT COUNT OF 17 HITS DESTROYING ALL ENEMY \
+SHIPS WINS")
+    print("THE AIM OF THE GAME IS TO DESTROY THE AI \
+ENEMY BY DESTROYING ALL THEIR SHIPS")
+    print("BEFORE THEY DESTROY YOURS. THE THING IS WELL \
+BOTH OF YOU CANT SEE WHERE TO")
+    print("SHOOT... BUT THAT SHOULDNT BE MUCH OF A PROBLEM.")
+    print("THE RULES ARE AS FOLLOWS: \n")
+    print("SHIPS: \n")
+    print("\u001b[36mDESTROYER\u001b[0m - SIZE OF 2 ON THE BOARD\n")
+    print("\u001b[35mSUBMARINE\u001b[0m - SIZE OF 3 ON THE BOARD\n")
+    print("\u001b[34mCRUISER\u001b[0m - SIZE OF 3 ON THE BOARD\n")
+    print("\u001b[33mBATTLESHIP\u001b[0m - SIZE OF 4 ON THE BOARD\n")
+    print("\u001b[32mCARRIER\u001b[0m - SIZE OF 5 ON THE BOARD\n")
+    # Instructions - Markers
+    print("MARKERS: \n")
+    print("@ IS A SHIP")
+    print("- IS A MISS")
+    print("X IS A HIT/SUNK SHIP")
+    time.sleep(5)
+    print(PHASE)
 
-  def contains(self, location):
-    for coords in self.coordinates:
-      if coords == location:
-        return True
-    return False
-  
-  def destroyed(self):
-    for coords in self.coordinates:
-      if board_display[coords['row']][coords['col']] == 'O':
+
+def name_input():
+    """
+    The name_input function takes input from the user and stores it 
+    in a variable that can be used further into the program
+    """
+    print("WHAT SHALL YOU BE KNOWN BY CAPTAIN?")
+    while True:
+        player_name = input("PLEASE ENTER A NAME:\n").upper()
+        if check_player_name(player_name):
+            break
+    print(f"\nTHE NAME YOU CHOSE IS: CAPTAIN {player_name}\n")
+    print(PHASE)
+    time.sleep(1)
+    print(' ')
+    return player_name
+
+
+def check_player_name(name):
+    """
+    The check_player_name function checks if the players name is longer 
+    than 10 or not long enough. Then it tells the player to enter a valid name
+    """
+    if len(name) > 10:
+        print('INVALID NAME. 10 CHARACTERS MAX')
         return False
-      elif board_display[coords['row']][coords['col']] == '*':
-        raise RuntimeError("Board display inaccurate")
-    return True
-
-  
-#Settings Variables
-
-
-row_size = 9 #number of rows
-col_size = 9 #number of columns
-num_ships = 4
-max_ship_size = 5
-min_ship_size = 2
-num_turns = 40
-
-#Create lists
-
-
-ship_list = []
-
-board = [[0] * col_size for x in range(row_size)]
-
-board_display = [["O"] * col_size for x in range(row_size)]
-
-#Functions
-
-
-def print_board(board_array):
-  print("\n  " + " ".join(str(x) for x in range(1, col_size + 1)))
-  for r in range(row_size):
-    print(str(r + 1) + " " + " ".join(str(c) for c in board_array[r]))
-  print()
-
-def search_locations(size, orientation):
-  locations = []
-
-  if orientation != 'horizontal' and orientation != 'vertical':
-    raise ValueError("Orientation must have a value of either 'horizontal' or 'vertical'.")
-
-  if orientation == 'horizontal':
-    if size <= col_size:
-      for r in range(row_size):
-        for c in range(col_size - size + 1):
-          if 1 not in board[r][c:c+size]:
-            locations.append({'row': r, 'col': c})
-  elif orientation == 'vertical':
-    if size <= row_size:
-      for c in range(col_size):
-        for r in range(row_size - size + 1):
-          if 1 not in [board[i][c] for i in range(r, r+size)]:
-            locations.append({'row': r, 'col': c})
-
-  if not locations:
-    return 'None'
-  else:
-    return locations
-
-def random_location():
-  size = randint(min_ship_size, max_ship_size)
-  orientation = 'horizontal' if randint(0, 1) == 0 else 'vertical'
-
-  locations = search_locations(size, orientation)
-  if locations == 'None':
-    return 'None'
-  else:
-    return {'location': locations[randint(0, len(locations) - 1)], 'size': size,\
-     'orientation': orientation}
-
-def get_row():
-  while True:
-    try:
-      guess = int(input("Row Guess: "))
-      if guess in range(1, row_size + 1):
-        return guess - 1
-      else:
-        print("\nOops, that's not even in the ocean.")
-    except ValueError:
-      print("\nPlease enter a number")
-
-def get_col():
-  while True:
-    try:
-      guess = int(input("Column Guess: "))
-      if guess in range(1, col_size + 1):
-        return guess - 1
-      else:
-        print("\nOops, that's not even in the ocean.")
-    except ValueError:
-      print("\nPlease enter a number")
-
-# Create the ships
-
-
-temp = 0
-while temp < num_ships:
-  ship_info = random_location()
-  if ship_info == 'None':
-    continue
-  else:
-    ship_list.append(Ship(ship_info['size'], ship_info['orientation'], ship_info['location']))
-    temp += 1
-del temp
-
-# Play Game
-
-
-os.system('clear')
-print_board(board_display)
-
-for turn in range(num_turns):
-  print("Turn:", turn + 1, "of", num_turns)
-  print("Ships left:", len(ship_list))
-  print()
-  
-  guess_coords = {}
-  while True:
-    guess_coords['row'] = get_row()
-    guess_coords['col'] = get_col()
-    if board_display[guess_coords['row']][guess_coords['col']] == 'X' or \
-     board_display[guess_coords['row']][guess_coords['col']] == '*':
-      print("\nYou guessed that one already.")
+    elif len(name) == 0:
+        print('INVALID NAME. NOT LONG ENOUGH')
     else:
-      break
-
-  os.system('clear')
-
-  ship_hit = False
-  for ship in ship_list:
-    if ship.contains(guess_coords):
-      print("Hit!")
-      ship_hit = True
-      board_display[guess_coords['row']][guess_coords['col']] = 'X'
-      if ship.destroyed():
-        print("Ship Destroyed!")
-        ship_list.remove(ship)
-      break
-  if not ship_hit:
-    board_display[guess_coords['row']][guess_coords['col']] = '*'
-    print("You missed!")
-
-  print_board(board_display)
-  
-  if not ship_list:
-    break
-
-# End Game
+        return True
 
 
-if ship_list:
-  print("You lose!")
-else:
-  print("All the ships are sunk. You win!")
+def print_board(board):
+    """
+    The print_board function prints out the battleship board
+    """
+    print("  A B C D E F G H")
+    print("  ---------------")
+    row_number = 1
+    for row in board:
+        print("%d|%s|" % (row_number, "|".join(row)))
+        row_number += 1
+
+
+def place_ship(board):
+    """
+    The place ship function loops throught the lengths of the ships and then
+    loops until the ship fits and dosent overlap any other ships on the board
+    and then places the ship.
+    """
+    #  loop through length of ships
+    for ship_length in SHIP_LENGTHS:
+        #  loop until ship fits and doesn't overlap
+        while True:
+            if board == COMPUTER_BOARD:
+                orientation, row, column = random.choice(["H", "V"]), \
+                    random.randint(0, 7), random.randint(0, 7)
+                if fit_ship_check(ship_length, row, column, orientation):
+                    #  check if ship overlaps
+                    if not ship_overlap(board, row, column, orientation,
+                                        ship_length):
+                        #  place ship
+                        if orientation == "H":
+                            for i in range(column, column + ship_length):
+                                board[row][i] = "@"
+                        else:
+                            for i in range(row, row + ship_length):
+                                board[i][column] = "@"
+                        break
+            else:
+                place_ship = True
+                print('Place the ship with a length of ' + str(ship_length))
+                row, column, orientation = user_input(place_ship)
+                if fit_ship_check(ship_length, row, column, orientation):
+                    # check if ship overlaps
+                    if ship_overlap(board, row, column, orientation,
+                                    ship_length):
+                        print(PHASE)
+                        print("THE SHIP DOSENT FIT HERE CAPTAIN \n")
+                    else:
+                        print(PHASE)
+                        print("EXCELLENT POSITIONING OF THE SHIP CAPTAIN \n")
+                        # place ship
+                        if orientation == "H":
+                            for i in range(column, column + ship_length):
+                                board[row][i] = "@"
+                        else:
+                            for i in range(row, row + ship_length):
+                                board[i][column] = "@"
+                        print_board(PLAYER_BOARD)
+                        break
+
+
+def fit_ship_check(SHIP_LENGTH, row, column, orientation):
+    """
+    The fit_ship_check checks if the ships inputted fit on the board
+    """
+    if orientation == "H":
+        if column + SHIP_LENGTH > 8:
+            return False
+        else:
+            return True
+    else:
+        if row + SHIP_LENGTH > 8:
+            return False
+        else:
+            return True
+
+
+def ship_overlap(board, row, column, orientation, ship_length):
+    """
+    The ship_overlap function checks if inputted ships overlap any existing
+    ships already on the board
+    """
+    if orientation == "H":
+        for i in range(column, column + ship_length):
+            if board[row][i] == "@":
+                return True
+    else:
+        for i in range(row, row + ship_length):
+            if board[i][column] == "@":
+                return True
+    return False
+
+
+def user_input(place_ship):
+    """
+    The user_input function takes input from the user to enter where they want
+    to place their ships as well as guessing the computers ships on the board
+    """
+    if place_ship == True:
+        while True:
+            try:
+                orientation = input("Enter orientation (H or V): \n").upper()
+                if orientation == "H" or orientation == "V":
+                    break
+                else:
+                    raise ValueError
+            except ValueError:
+                print("Please enter a valid orientaion (H or V)")
+        while True:
+            try:
+                row = input("Enter the row of the ship 1-8: \n")
+                if row in '12345678':
+                    row = int(row) - 1
+                    break
+                else:
+                    raise ValueError
+            except ValueError:
+                print("Please enter a valid letter between 1-8")
+        while True:
+            try:
+                column = input("Enter the column of the ship A-H: \n").upper()
+                if column not in 'ABCDEFGH':
+                    print("Please enter a valid letter between A-H")
+                else:
+                    column = letters_conversion[column]
+                    break
+            except KeyError:
+                print("Please enter a valid letter between A-H")
+        return row, column, orientation
+    else:
+        while True:
+            try:
+                row = input("Enter the row of the ship 1-8: \n")
+                if row in '12345678':
+                    row = int(row) - 1
+                    break
+                else:
+                    raise ValueError
+            except ValueError:
+                print("Please enter a valid letter between 1-8")
+        while True:
+            try:
+                column = input("Enter the column of the ship A-H: \n").upper()
+                if column not in 'ABCDEFGH':
+                    print("Please enter a valid letter between A-H")
+                else:
+                    column = letters_conversion[column]
+                    break
+            except KeyError:
+                print("Please enter a valid letter between A-H")
+        return row, column
+
+
+def hit_count(board):
+    """
+    The hit_count function counts the number of hits each board (Player,
+    Computer) has taken
+    """
+    count = 0
+    for row in board:
+        for column in row:
+            if column == "X":
+                count += 1
+    return count
+
+
+def turn(board):
+    """
+    The turn function goes through the users and computers turns
+    """
+    if board == PLAYER_GUESS_BOARD:
+        row, column = user_input(PLAYER_GUESS_BOARD)
+        if board[row][column] == "-":
+            turn(board)
+        elif board[row][column] == "X":
+            turn(board)
+        elif COMPUTER_BOARD[row][column] == "@":
+            board[row][column] = "X"
+            print("WE HIT THEM, GREAT SHOT CAPTAIN")
+        else:
+            board[row][column] = "-"
+            print("WE MISSED, WE WILL GET THEM ON THE NEXT SHOT")
+    else:
+        row, column = random.randint(0, 7), random.randint(0, 7)
+        if board[row][column] == "-":
+            turn(board)
+        elif board[row][column] == "X":
+            turn(board)
+        elif PLAYER_BOARD[row][column] == "@":
+            board[row][column] = "X"
+            print("WE ARE HIT, FIRE BACK!")
+            print("COMPUTERS BOARD \n")
+        else:
+            board[row][column] = "-"
+            print("THE COMPUTER MISSED, PHEW...\n")
+            print("COMPUTERS BOARD \n")
+
+
+def start_game():
+    """
+    Start game function
+    """
+    start_key = input("PRESS P TO START GAME: \n").upper()
+    while start_key != "P":
+        start_key = input("PRESS P TO START GAME: \n").upper()
+    print(PHASE)
+    # Computer places ships
+    place_ship(COMPUTER_BOARD)
+    # Computer board displayed
+    # print_board(COMPUTER_BOARD)
+    # Player board displayed
+    print_board(PLAYER_BOARD)
+    # Player places ships
+    place_ship(PLAYER_BOARD)
+
+    while True:
+        # Player turn
+        while True:
+            print(PHASE)
+            print('GUESS A BATTLESHIP LOCATION CAPTAIN!\n')
+            print_board(PLAYER_GUESS_BOARD)
+            turn(PLAYER_GUESS_BOARD)
+            time.sleep(2)
+            break
+        if hit_count(PLAYER_GUESS_BOARD) == 17:
+            print("\u001b[32mYOU WON!\u001b[0m, BRILLIANT SHOOTING CAPTAIN")
+            break
+        # Computer turn
+        while True:
+            turn(COMPUTER_GUESS_BOARD)
+            time.sleep(2)
+            break
+        print_board(COMPUTER_GUESS_BOARD)
+        if hit_count(COMPUTER_GUESS_BOARD) == 17:
+            print(
+                "UNLUCKY \u001b[31mYOU LOSE\u001b[0m CAPTAIN, WE WILL GET THEM \
+                NEXT TIME")
+            break
+
+
+def play_again():
+
+    """
+    Asks the player if they want to play again or quit
+    """
+    print("WOULD YOU LIKE TO PLAY AGAIN?, CAPTAIN \n")
+    answer = input("ENTER Y OR N: \n").upper()
+    print(' ')
+    while True:
+        if answer == "Y":
+            print(PHASE)
+            time.sleep(2)
+            welcome_message()
+        elif answer == "N":
+            print(' ')
+            print('GOODBYE!, SEE YOU SOON CAPTAIN')
+            print(' ')
+            print(PHASE)
+            return False
+            welcome_message()
+        else:
+            print(' ')
+            print('PLEASE ENTER Y OR N')
+            answer = input('ENTER Y OR N: \n').upper()
+
+
+if __name__ == "__main__":
+    welcome_message()
+    name_input()
+    start_game()
+    play_again()
