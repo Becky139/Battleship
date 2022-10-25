@@ -13,16 +13,7 @@ SHIP_LENGTHS = [2, 3, 3, 4, 5]
 
 # The letters_conversion dictionary assigns letters to numbers that can be
 # used for ship placements
-letters_conversion = {
-    'A': 0,
-    'B': 1,
-    'C': 2,
-    'D': 3,
-    'E': 4,
-    'F': 5,
-    'G': 6,
-    'H': 7
-}
+letters_conversion = {"A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5, "G": 6, "H": 7}
 
 # The PHASE variable prints "=" 80 times as a line break.
 PHASE = "=" * 80
@@ -32,7 +23,8 @@ def welcome_message():
     """
     The welcome_message function displays a welcome message every new game
     """
-    print("""\
+    print(
+        """\
     \u001b[32m
   ____        _   _   _           _     _           
  |  _ \      | | | | | |         | |   (_)          
@@ -43,27 +35,38 @@ def welcome_message():
                                          | |        
                                          |_| 
 \u001b[0m       
-""")
+"""
+    )
 
     # Welcome Message
     print("\nWelcome To Battleships!\n")
     print("THE BOARD IS A GRID OF 8x8 WITH FIVE SHIPS TO SINK")
-    print("\u001b[32mCARRIER - \u001b[33mBATTLESHIP - \
+    print(
+        "\u001b[32mCARRIER - \u001b[33mBATTLESHIP - \
 \u001b[34mCRUISER - \u001b[35mSUBMARINE - \u001b[36mDESTROYER\
-    \u001b[0m")
-    print("EACH PLAYER HAS 17 LIVES, \
-THE FIRST TO STRIKE 17 BLOWS TO THE ENEMYS SHIPS WINS\n")
+    \u001b[0m"
+    )
+    print(
+        "EACH PLAYER HAS 17 LIVES, \
+THE FIRST TO STRIKE 17 BLOWS TO THE ENEMYS SHIPS WINS\n"
+    )
     time.sleep(5)
     print(PHASE)
 
     # Instructions
     print("\u001b[31mINSTRUCTIONS:\u001b[0m \n")
-    print("THE FIRST PLAYER TO GET A HIT COUNT OF 17 HITS DESTROYING ALL ENEMY \
-SHIPS WINS")
-    print("THE AIM OF THE GAME IS TO DESTROY THE AI \
-ENEMY BY DESTROYING ALL THEIR SHIPS")
-    print("BEFORE THEY DESTROY YOURS. THE THING IS WELL \
-BOTH OF YOU CANT SEE WHERE TO")
+    print(
+        "THE FIRST PLAYER TO GET A HIT COUNT OF 17 HITS DESTROYING ALL ENEMY \
+SHIPS WINS"
+    )
+    print(
+        "THE AIM OF THE GAME IS TO DESTROY THE AI \
+ENEMY BY DESTROYING ALL THEIR SHIPS"
+    )
+    print(
+        "BEFORE THEY DESTROY YOURS. THE THING IS WELL \
+BOTH OF YOU CANT SEE WHERE TO"
+    )
     print("SHOOT... BUT THAT SHOULDNT BE MUCH OF A PROBLEM.")
     print("THE RULES ARE AS FOLLOWS: \n")
     print("SHIPS: \n")
@@ -83,7 +86,7 @@ BOTH OF YOU CANT SEE WHERE TO")
 
 def name_input():
     """
-    The name_input function takes input from the user and stores it 
+    The name_input function takes input from the user and stores it
     in a variable that can be used further into the program
     """
     print("WHAT SHALL YOU BE KNOWN BY CAPTAIN?")
@@ -94,20 +97,20 @@ def name_input():
     print(f"\nTHE NAME YOU CHOSE IS: CAPTAIN {player_name}\n")
     print(PHASE)
     time.sleep(1)
-    print(' ')
+    print(" ")
     return player_name
 
 
 def check_player_name(name):
     """
-    The check_player_name function checks if the players name is longer 
+    The check_player_name function checks if the players name is longer
     than 10 or not long enough. Then it tells the player to enter a valid name
     """
     if len(name) > 10:
-        print('INVALID NAME. 10 CHARACTERS MAX')
+        print("INVALID NAME. 10 CHARACTERS MAX")
         return False
     elif len(name) == 0:
-        print('INVALID NAME. NOT LONG ENOUGH')
+        print("INVALID NAME. NOT LONG ENOUGH")
     else:
         return True
 
@@ -135,12 +138,14 @@ def place_ship(board):
         #  loop until ship fits and doesn't overlap
         while True:
             if board == COMPUTER_BOARD:
-                orientation, row, column = random.choice(["H", "V"]), \
-                    random.randint(0, 7), random.randint(0, 7)
+                orientation, row, column = (
+                    random.choice(["H", "V"]),
+                    random.randint(0, 7),
+                    random.randint(0, 7),
+                )
                 if fit_ship_check(ship_length, row, column, orientation):
                     #  check if ship overlaps
-                    if not ship_overlap(board, row, column, orientation,
-                                        ship_length):
+                    if not ship_overlap(board, row, column, orientation, ship_length):
                         #  place ship
                         if orientation == "H":
                             for i in range(column, column + ship_length):
@@ -151,12 +156,11 @@ def place_ship(board):
                         break
             else:
                 place_ship = True
-                print('Place the ship with a length of ' + str(ship_length))
+                print("Place the ship with a length of " + str(ship_length))
                 row, column, orientation = user_input(place_ship)
                 if fit_ship_check(ship_length, row, column, orientation):
                     # check if ship overlaps
-                    if ship_overlap(board, row, column, orientation,
-                                    ship_length):
+                    if ship_overlap(board, row, column, orientation, ship_length):
                         print(PHASE)
                         print("THE SHIP DOSENT FIT HERE CAPTAIN \n")
                     else:
@@ -223,7 +227,7 @@ def user_input(place_ship):
         while True:
             try:
                 row = input("Enter the row of the ship 1-8: \n")
-                if row in '12345678':
+                if row in "12345678":
                     row = int(row) - 1
                     break
                 else:
@@ -233,7 +237,7 @@ def user_input(place_ship):
         while True:
             try:
                 column = input("Enter the column of the ship A-H: \n").upper()
-                if column not in 'ABCDEFGH':
+                if column not in "ABCDEFGH":
                     print("Please enter a valid letter between A-H")
                 else:
                     column = letters_conversion[column]
@@ -245,7 +249,7 @@ def user_input(place_ship):
         while True:
             try:
                 row = input("Enter the row of the ship 1-8: \n")
-                if row in '12345678':
+                if row in "12345678":
                     row = int(row) - 1
                     break
                 else:
@@ -255,7 +259,7 @@ def user_input(place_ship):
         while True:
             try:
                 column = input("Enter the column of the ship A-H: \n").upper()
-                if column not in 'ABCDEFGH':
+                if column not in "ABCDEFGH":
                     print("Please enter a valid letter between A-H")
                 else:
                     column = letters_conversion[column]
@@ -331,7 +335,7 @@ def start_game():
         # Player turn
         while True:
             print(PHASE)
-            print('GUESS A BATTLESHIP LOCATION CAPTAIN!\n')
+            print("GUESS A BATTLESHIP LOCATION CAPTAIN!\n")
             print_board(PLAYER_GUESS_BOARD)
             turn(PLAYER_GUESS_BOARD)
             time.sleep(2)
@@ -348,7 +352,8 @@ def start_game():
         if hit_count(COMPUTER_GUESS_BOARD) == 17:
             print(
                 "UNLUCKY \u001b[31mYOU LOSE\u001b[0m CAPTAIN, WE WILL GET THEM \
-                NEXT TIME")
+                NEXT TIME"
+            )
             break
 
 
@@ -359,23 +364,23 @@ def play_again():
     """
     print("WOULD YOU LIKE TO PLAY AGAIN?, CAPTAIN \n")
     answer = input("ENTER Y OR N: \n").upper()
-    print(' ')
+    print(" ")
     while True:
         if answer == "Y":
             print(PHASE)
             time.sleep(2)
             welcome_message()
         elif answer == "N":
-            print(' ')
-            print('GOODBYE!, SEE YOU SOON CAPTAIN')
-            print(' ')
+            print(" ")
+            print("GOODBYE!, SEE YOU SOON CAPTAIN")
+            print(" ")
             print(PHASE)
             return False
             welcome_message()
         else:
-            print(' ')
-            print('PLEASE ENTER Y OR N')
-            answer = input('ENTER Y OR N: \n').upper()
+            print(" ")
+            print("PLEASE ENTER Y OR N")
+            answer = input("ENTER Y OR N: \n").upper()
 
 
 if __name__ == "__main__":
