@@ -1,9 +1,39 @@
 from random import randint
 import os
 
+def clear_console():
+    """
+    Clears the console.
+    """
+    # This line is credited to
+    # https://stackoverflow.com/questions/2084508/clear-terminal-in-python
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+
+def welcome():
+    """
+    Displays the welcome message.
+    Directs user to create user or log in functions
+    """
+    clear_console()
+    print(BR * 4)
+    print(C('Welcome to BATTLESHIP!'))
+    print(BR * 4)
+    user_choice = input(' ' * 25 + 'Have you played before? Y/N: ').strip()
+    if user_choice.upper() == 'Y':
+        clear_console()
+        login()
+    elif user_choice.upper() == 'N':
+        clear_console()
+        create_user(0)
+    else:
+        clear_console()
+        print(BR * 8)
+        print(C('You must choose either Y or N.'))
+        time.sleep(3)
+        welcome()
+
 #Ship Class
-
-
 class Ship:
   def __init__(self, size, orientation, location):
     self.size = size
