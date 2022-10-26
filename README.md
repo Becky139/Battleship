@@ -6,6 +6,7 @@
 
 ## Table of contents
 1. [Introduction](#Introduction)
+    1. [How To Play](#How-To-Play)
 2. [UX](#UX)
     1. [Ideal User Demographic](#Ideal-User-Demographic)
     2. [User Stories](#User-Stories)
@@ -41,9 +42,14 @@ For the Portfolio Project 3 - Python Essentials, the developer decided to build 
 
 Battleship is known worldwide as a pencil and paper game which dates from World War I. It was published by various companies as a pad-and-pencil game in the 1930s and was released as a plastic board game by Milton Bradley in 1967. The game has spawned electronic versions, video games, smart device apps and a film.
 
+### How To Play
+
+- The player enters their name and jumps straight into the action.
+- The player places their 5 ships on the board.
+- When all ships have been placed on the board the battle begins the player guesses the co-ordinates of the computers ships and the computer guesses where the player placed     their ships. 
+- The first to destroy all ships wins the game.
+
 [Back to top ⇧](#)
-
-
 
 ## UX
 ### Ideal User Demographic
@@ -92,9 +98,6 @@ The application needs to enable the **user** to:
 - generate a random board on each play-through placeing ships in differant locations.
     
 
-
-
-
 #### Scope
 The scope plane is about defining requirements based on the goals established on the strategy plane. Using the information in the strategy plane, the identified required features have been broken into the following two categories.
 - Content Requirements:
@@ -103,7 +106,7 @@ The scope plane is about defining requirements based on the goals established on
         - A consistent theme, and game play. 
 - Functionality Requirements:
     - The user will be able to:
-        - Enter either a letter or a whole word if they think they know it.
+        - Enter co-ordanites using numbers and letters.
         - Replay the game.
         - End the program at the end of the game.
 
@@ -132,10 +135,67 @@ A flowchart was created to show the logic the functions would follow.
 
 ## Features
 ### Existing Features
+- The Welcome Message
 
+    - When a new game starts the welcome message is displayed.
+    - The user is met with colour coded sections and ASCII art (Battleships Logo) for clarity. 
+    - Within this the different types of ship are listed, as well as the: board size, total number of hits needed to win (17) and the different styles of marker.
+    - It also contains the instructions in how to play the game.
+    - The player is then prompted for name input, which complies to the validation checks listed. Input is repeated until a valid name is entered.
+
+![Welcome message](/assets/images/Battleship-home-screen.png)
+![Instructions](/assets/images/battleships-instructions.png)
+![Name input](/assets/images/battleship-name.png)
+![Start game](/assets/images/battleship-start-game.png)
+
+- The Board
+    - Once name input is validated, it is then used to create the player's board, which is displayed to them in the terminal. The user is prompted to place each ship in turn from smallest to largest (2-5), the ship size is displayed to them.
+    - Orientation, row and then column inputs are requested for the ship location, all having validation checks on them. Before placement of the ships on the board, overlap and fit checks are ran on the input location for the ship, which must be passed else the user is prompted for input again.
+    - Once a all of the inputs are entered and valid the ship is placed on the players board, their board is then printed to them with the placed ship for reference when placing the next. The computers ships are randomly placed on their board before the player places their ships, following the same validation checks.
+
+![Player board](/assets/images/player-board.png)
+
+![Player ship](/assets/images/place-ship.png)
+
+![Player placed all ships](/assets/images/all-ships-placed.png)
+
+- The Guess Board
+    - Once the ships have been placed on each board the game play begins.
+    - The player always goes first, their guess board is printed out to them for reference when entering a row and column, which must pass validation checks if not the user is prompted to enter valid data again. Once a valid input is entered the result of their attack is printed out to them before the guess board is updated and printed out to them again. The computers guess is printed out to the user alongside the computers board of where the player hit for reference to see where there shot landed. Validation checks prevent the user repeating already guessed spots on the board.
+    - The sleep method of the time library and phase/line break is used to seperate and emphasize the individual turns. There is a countdown of two seconds before the computer makes their attack and the terminal is updated this also adds more suspense.
+
+![Guess ship](/assets/images/guess-ship.png)
+![Guess again](/assets/images/guess-again.png)
+
+- Ship Display
+    - Ships that haven't been hit are displayed on the player's board as the at sign "@".
+    - Letters are used for the column display and numbers for the rows, this allows for easy differentiation when inputting coordinates.
+    - The markers that have been used give a good level of contrast and distinction between the different markers and what they represent.  "@" to represent ships, "-" for a miss and "X" for a hit.
+
+![Ship display](/assets/images/ship-display.png)
+
+- Game Play Display
+    - Feedback to the user is provided constantly throught all phases of the game.
+    - All sequences are broken down to increase ease of use and clarity. The boards are updated appropriately as well as the hit counter incrementing when required.
+    - A consistent use of the sleep method and phase/line breaks is also used throughout to increase ease of use and clarity.
+
+![Game play display](/assets/images/game-play-display.png)
+
+- Play Again
+    - Once all the conditions of an end game have been met, which is a player either computer or user has hit the total hit count of 17, the turn sequence is broken out off, with a win or lose message being displayed.
+    - The player is them prompted to play again, input validation is used here to ensure a Y or N is entered.
+    - If the user inputs with a "y" then the game is started from the beginning, else the player is told goodbye and the program ends.
+
+![Result](/assets/images/result.png)
+![End game](/assets/images/end-game.png)
 
 ### Features to Implement in the future
+*There are no features left to implement from the initial scope of my project, however I have some features that I would like to add in the future.*
 
+- Print the Player Board and Computer Board side by side in the terminal, rather than on top of one another.
+- Make a 2 player version of the game.
+- Highlight the win or lose message with more effect.
+- Let the player choose the size of the board.
 
 [Back to top ⇧](#)
 
@@ -144,12 +204,12 @@ A flowchart was created to show the logic the functions would follow.
 ## Issues and Bugs 
 The developer ran into several issues during the development of the website, with the noteworthy ones listed below, along with solutions or ideas to implement in the future.
 
-bug requirements
+- Solved Bugs
+    - A bug I came across was the players error message for when placing a ship which overlaps over existing ships or dosen't fit the board was being printed when it was the computers turn to place its ships. I fixed it by using a for loop in the players turn of the place_ship function to print the message therefore no message would be printed if the computers ship overlapped or did not fit the board. 
 
 
-
-
-
+- Remaining Bugs
+    - No bugs remaining.
 
 [Back to top ⇧](#)
 
