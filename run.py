@@ -162,10 +162,10 @@ def place_ship(board):
                     # check if ship overlaps
                     if ship_overlap(board, row, column, orientation, ship_length):
                         print(PHASE)
-                        print("THE SHIP DOSENT FIT HERE CAPTAIN {player_name}\n")
+                        print("THE SHIP DOSENT FIT HERE CAPTAIN\n")
                     else:
                         print(PHASE)
-                        print("EXCELLENT POSITIONING OF THE SHIP CAPTAIN {player_name}\n")
+                        print("EXCELLENT POSITIONING OF THE SHIP CAPTAIN\n")
                         # place ship
                         if orientation == "H":
                             for i in range(column, column + ship_length):
@@ -294,15 +294,15 @@ def turn(board):
             turn(board)
         elif COMPUTER_BOARD[row][column] == "@":
             board[row][column] = "X"
-            print("WE HIT THEM, GREAT SHOT CAPTAIN {player_name}")
+            print("WE HIT THEM, GREAT SHOT CAPTAIN")
         else:
             board[row][column] = "-"
             print("WE MISSED, WE WILL GET THEM ON THE NEXT SHOT")
     else:
         row, column = random.randint(0, 7), random.randint(0, 7)
-        if board[row][column] == "-":
+        if board[row][column] == "\u001b[31m-\u001b[0m":
             turn(board)
-        elif board[row][column] == "X":
+        elif board[row][column] == "\u001b[32mX\u001b[0m":
             turn(board)
         elif PLAYER_BOARD[row][column] == "@":
             board[row][column] = "X"
@@ -341,7 +341,7 @@ def start_game():
             time.sleep(2)
             break
         if hit_count(PLAYER_GUESS_BOARD) == 17:
-            print("\u001b[32mYOU WON!\u001b[0m, BRILLIANT SHOOTING CAPTAIN {player_name}")
+            print("\u001b[32mYOU WON!\u001b[0m, BRILLIANT SHOOTING CAPTAIN")
             break
         # Computer turn
         while True:
@@ -351,8 +351,7 @@ def start_game():
         print_board(COMPUTER_GUESS_BOARD)
         if hit_count(COMPUTER_GUESS_BOARD) == 17:
             print(
-                "UNLUCKY \u001b[31mYOU LOSE\u001b[0m CAPTAIN {player_name}, WE WILL GET THEM \
-                NEXT TIME"
+                "UNLUCKY \u001b[31mYOU LOSE\u001b[0m CAPTAIN, WE WILL GET THEM\n NEXT TIME"
             )
             break
 
@@ -372,7 +371,7 @@ def play_again():
             welcome_message()
         elif answer == "N":
             print(" ")
-            print("GOODBYE!, SEE YOU SOON CAPTAIN {player_name}")
+            print("GOODBYE!, SEE YOU SOON CAPTAIN")
             print(" ")
             print(PHASE)
             return False
