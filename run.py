@@ -42,8 +42,8 @@ def welcome_message():
     print("\nWelcome To Battleships!\n")
     print("THE BOARD IS A GRID OF 8x8 WITH FIVE SHIPS TO SINK")
     print(
-        "\u001b[32mCARRIER - \u001b[33mBATTLESHIP - \
-\u001b[34mCRUISER - \u001b[35mSUBMARINE - \u001b[36mDESTROYER\
+        "\u001b[34mCARRIER - \u001b[32mBATTLESHIP - \
+\u001b[33mCRUISER - \u001b[35mSUBMARINE - \u001b[36mDESTROYER\
     \u001b[0m"
     )
     print(
@@ -72,14 +72,14 @@ BOTH OF YOU CANT SEE WHERE TO"
     print("SHIPS: \n")
     print("\u001b[36mDESTROYER\u001b[0m - SIZE OF 2 ON THE BOARD\n")
     print("\u001b[35mSUBMARINE\u001b[0m - SIZE OF 3 ON THE BOARD\n")
-    print("\u001b[34mCRUISER\u001b[0m - SIZE OF 3 ON THE BOARD\n")
-    print("\u001b[33mBATTLESHIP\u001b[0m - SIZE OF 4 ON THE BOARD\n")
-    print("\u001b[32mCARRIER\u001b[0m - SIZE OF 5 ON THE BOARD\n")
+    print("\u001b[33mCRUISER\u001b[0m - SIZE OF 3 ON THE BOARD\n")
+    print("\u001b[32mBATTLESHIP\u001b[0m - SIZE OF 4 ON THE BOARD\n")
+    print("\u001b[34mCARRIER\u001b[0m - SIZE OF 5 ON THE BOARD\n")
     # Instructions - Markers
     print("MARKERS: \n")
     print("@ IS A SHIP")
-    print("- IS A MISS")
-    print("X IS A HIT/SUNK SHIP")
+    print("\u001b[31m-\u001b[IS A MISS")
+    print("\u001b[31mX\u001b[IS A HIT/SUNK SHIP")
     time.sleep(5)
     print(PHASE)
 
@@ -162,10 +162,10 @@ def place_ship(board):
                     # check if ship overlaps
                     if ship_overlap(board, row, column, orientation, ship_length):
                         print(PHASE)
-                        print("THE SHIP DOSENT FIT HERE CAPTAIN \n")
+                        print("THE SHIP DOSENT FIT HERE CAPTAIN {player_name}\n")
                     else:
                         print(PHASE)
-                        print("EXCELLENT POSITIONING OF THE SHIP CAPTAIN \n")
+                        print("EXCELLENT POSITIONING OF THE SHIP CAPTAIN {player_name}\n")
                         # place ship
                         if orientation == "H":
                             for i in range(column, column + ship_length):
@@ -294,7 +294,7 @@ def turn(board):
             turn(board)
         elif COMPUTER_BOARD[row][column] == "@":
             board[row][column] = "X"
-            print("WE HIT THEM, GREAT SHOT CAPTAIN")
+            print("WE HIT THEM, GREAT SHOT CAPTAIN {player_name}")
         else:
             board[row][column] = "-"
             print("WE MISSED, WE WILL GET THEM ON THE NEXT SHOT")
@@ -341,7 +341,7 @@ def start_game():
             time.sleep(2)
             break
         if hit_count(PLAYER_GUESS_BOARD) == 17:
-            print("\u001b[32mYOU WON!\u001b[0m, BRILLIANT SHOOTING CAPTAIN")
+            print("\u001b[32mYOU WON!\u001b[0m, BRILLIANT SHOOTING CAPTAIN {player_name}")
             break
         # Computer turn
         while True:
@@ -351,7 +351,7 @@ def start_game():
         print_board(COMPUTER_GUESS_BOARD)
         if hit_count(COMPUTER_GUESS_BOARD) == 17:
             print(
-                "UNLUCKY \u001b[31mYOU LOSE\u001b[0m CAPTAIN, WE WILL GET THEM \
+                "UNLUCKY \u001b[31mYOU LOSE\u001b[0m CAPTAIN {player_name}, WE WILL GET THEM \
                 NEXT TIME"
             )
             break
@@ -362,7 +362,7 @@ def play_again():
     """
     Asks the player if they want to play again or quit
     """
-    print("WOULD YOU LIKE TO PLAY AGAIN?, CAPTAIN \n")
+    print("WOULD YOU LIKE TO PLAY AGAIN?\n")
     answer = input("ENTER Y OR N: \n").upper()
     print(" ")
     while True:
@@ -372,7 +372,7 @@ def play_again():
             welcome_message()
         elif answer == "N":
             print(" ")
-            print("GOODBYE!, SEE YOU SOON CAPTAIN")
+            print("GOODBYE!, SEE YOU SOON CAPTAIN {player_name}")
             print(" ")
             print(PHASE)
             return False
