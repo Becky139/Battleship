@@ -78,8 +78,8 @@ BOTH OF YOU CANT SEE WHERE TO"
     # Instructions - Markers
     print("MARKERS: \n")
     print("@ IS A SHIP")
-    print("\u001b[31m-\u001b[0m IS A MISS")
-    print("\u001b[32mX\u001b[0m IS A HIT/SUNK SHIP")
+    print("\u001b[31m-\u001b[0m IS A MISS\n")
+    print("\u001b[32mX\u001b[0m IS A HIT/SUNK SHIP\n")
     time.sleep(5)
     print(PHASE)
 
