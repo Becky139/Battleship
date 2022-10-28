@@ -277,7 +277,7 @@ def hit_count(board):
     count = 0
     for row in board:
         for column in row:
-            if column == "X":
+            if column == "\u001b[32mX\u001b[0m":
                 count += 1
     return count
 
