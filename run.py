@@ -25,7 +25,7 @@ def welcome_message():
     """
     print(
         """\
-    \u001b[32m
+    \u001b[33m
   ____        _   _   _           _     _           
  |  _ \      | | | | | |         | |   (_)          
  | |_) | __ _| |_| |_| | ___  ___| |__  _ _ __  ___ 
@@ -288,28 +288,28 @@ def turn(board):
     """
     if board == PLAYER_GUESS_BOARD:
         row, column = user_input(PLAYER_GUESS_BOARD)
-        if board[row][column] == "-":
+        if board[row][column] == "\u001b[31m0\u001b[0m":
             turn(board)
-        elif board[row][column] == "X":
+        elif board[row][column] == "\u001b[32mX\u001b[0m":
             turn(board)
         elif COMPUTER_BOARD[row][column] == "@":
-            board[row][column] = "X"
+            board[row][column] = "\u001b[32mX\u001b[0m"
             print("WE HIT THEM, GREAT SHOT CAPTAIN")
         else:
-            board[row][column] = "-"
+            board[row][column] = "\u001b[31m0\u001b[0m"
             print("WE MISSED, WE WILL GET THEM ON THE NEXT SHOT")
     else:
         row, column = random.randint(0, 7), random.randint(0, 7)
-        if board[row][column] == "\u001b[31m-\u001b[0m":
+        if board[row][column] == "\u001b[31m0\u001b[0m":
             turn(board)
         elif board[row][column] == "\u001b[32mX\u001b[0m":
             turn(board)
         elif PLAYER_BOARD[row][column] == "@":
-            board[row][column] = "X"
+            board[row][column] = "\u001b[32mX\u001b[0m"
             print("WE ARE HIT, FIRE BACK!")
             print("COMPUTERS BOARD \n")
         else:
-            board[row][column] = "-"
+            board[row][column] = "\u001b[31m0\u001b[0m"
             print("THE COMPUTER MISSED, PHEW...\n")
             print("COMPUTERS BOARD \n")
 
