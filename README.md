@@ -1,8 +1,8 @@
 # Battleship Game
 
-![Battleship Mockup Images](readme_files/Images/responsive.PNG)
+![Battleship Mockup Images](assets/readme_files/responsive.png)
 
-[View the live project here]()
+[View the live project here](https://battleship-rm.herokuapp.com/)
 
 ## Table of contents
 1. [Introduction](#Introduction)
@@ -145,7 +145,7 @@ The board class also runs functions such as the place_ship function so the playe
     - It also contains the instructions in how to play the game.
     - The player is then prompted for name input, which complies to the validation checks listed. Input is repeated until a valid name is entered.
 
-![Welcome message](/assets/readme_files/Battleship-home-screen.png)
+![Welcome message](/assets/readme_files/battleship-home-screen.png)
 ![Instructions](/assets/readme_files/battleships-instructions.png)
 ![Name input](/assets/readme_files/battleship-name.png)
 ![Start game](/assets/readme_files/battleship-start-game.png)
