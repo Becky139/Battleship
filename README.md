@@ -181,7 +181,7 @@ The board class also runs functions such as the place_ship function so the playe
     - All sequences are broken down to increase ease of use and clarity. The boards are updated appropriately as well as the hit counter incrementing when required.
     - A consistent use of the sleep method and phase/line breaks is also used throughout to increase ease of use and clarity.
 
-![Game play display](/assets/readme_files/game-play-display.png)
+![Game play display](/assets/readme_files/play-game-display.png)
 
 - Play Again
     - Once all the conditions of an end game have been met, which is a player either computer or user has hit the total hit count of 17, the turn sequence is broken out off, with a win or lose message being displayed.
@@ -270,78 +270,7 @@ Limit testing has been conducted by myself, users and peers on slack through the
 ### Common Elements Testing
 Manual testing was conducted on the following elements that appear in the program:
      
-- Inputting a letter would tell the user if the entry is correct or incorrect. The image of the skeleton is built with every incorrect entry.
 
-<details>
-<summary>Letter Input</summary>
-
-![Letter Input](readme_files/Testing/input_letter.gif)
-
-</details>
-
-     
-- Inputting a non-alpha character will display a message to the user telling them the character is not a valid guess.
-
-<details>
-<summary>Invalid Character Input</summary>
-
-![Invalid Character Input](readme_files/Testing/)
-
-</details>
-
-
-
-</details>
-
-
-
-<details>
-<summary>Input Error</summary>
-
-![Word Input Error](readme_files/Testing/)
-
-</details>
-
-
-</details>
-
-
-
-<details>
-<summary>Win Game </summary>
-
-![Win Game With Word](readme_files/Testing/)
-
-</details>
-
-
-
-
-<details>
-<summary>Lose Game</summary>
-
-![Lose Game](readme_files/Testing/)
-
-</details>
-
-
-
-<details>
-<summary>Restart Game</summary>
-
-![Restart Game](readme_files/Testing/)
-
-</details>
-
-
-
-
-<details>
-<summary>End Program</summary>
-
-![End Program](readme_files/Testing/)
-
-</details>
 
 
 [Back to top ⇧](#)
@@ -351,7 +280,7 @@ Manual testing was conducted on the following elements that appear in the progra
 ## Automated Testing
 
 ### Code Validation
-The [PEP8 Online Checker](https://pep8online.com/) service was used to validate the code written in the word_list.py and run.py files.
+The [PEP8 Online Checker](https://pep8online.com/) service was used to validate the code written in the run.py file.
 
 **Results:**
 
@@ -361,15 +290,6 @@ The [PEP8 Online Checker](https://pep8online.com/) service was used to validate 
 <summary>run.py Validation results</summary>
 
 ![run.py Validation results](readme_files/Testing/)
-
-</details>
-
-- word_list file
-
-<details>
-<summary>word_list.py Validation results</summary>
-
-![word_list.py Validation results](readme_files/Testing/)
 
 </details>
 
