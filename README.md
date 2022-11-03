@@ -196,7 +196,6 @@ The board class also runs functions such as the place_ship function so the playe
 
 - Print the Player Board and Computer Board side by side in the terminal, rather than on top of one another.
 - Make a 2 player version of the game.
-- Highlight the win or lose message with more effect.
 - Let the player choose the size of the board.
 
 [Back to top ⇧](#)
@@ -263,19 +262,19 @@ Limit testing has been conducted by myself, users and peers on slack through the
 
 [Back to top ⇧](#)
 
-
-
 ## Manual Testing
 
 ### Common Elements Testing
 Manual testing was conducted on the following elements that appear in the program:
      
-
+- Due to the nature of the project, testing has been implemented throughout the entire project mainly debugging through running the program in the terminal as well as debugging using the python debugger.
+- Sections of code where developed before implementation to make sure it worked and also where run throught the Python validator.
+Tested with invalid inputs: Such as using TypeErrors and ValueErrors, string instead of integers, out of bound inputs, same input twice.
+- Tested in both Gitpod terminal and CI Heroku terminal.
+- Limit testing has been conducted by myself, Family and peers on slack through the peer-code-review channel, there is currently no reported issues that cause the game to break.
 
 
 [Back to top ⇧](#)
-
-
 
 ## Automated Testing
 
@@ -284,18 +283,17 @@ The [PEP8 Online Checker](https://pep8online.com/) service was used to validate 
 
 **Results:**
 
-- run file
-
 <details>
 <summary>run.py Validation results</summary>
 
-![run.py Validation results](readme_files/Testing/)
+![run.py Validation results](assets/readme_files/python-code-validator.png)
 
 </details>
 
 
 ## User testing 
 
+This was tested by some members of my family inculding my Mum and Sister and some people in the slack commuity were asked to review the site and documentation to point out any bugs and/or user experience issues. With there helpful advice and with guideance from my mentor throughout the process led to changes and improvements.
 
 ## Deployment
 ### GitHub
@@ -367,11 +365,15 @@ The webpage [GitHub Docs - Fork a repo](https://docs.github.com/en/github-ae@lat
 The developer consulted multiple sites to better understand the code they were trying to implement. The following sites were used on a more regular basis:
 - [Stack Overflow](https://stackoverflow.com/ "Link to Stack Overflow page")
 - [W3Schools](https://www.w3schools.com/ "Link to W3Schools page")
+- [github](https://github.com/renatalantos/Battleship-in-Python "link to another students game")
+- [Heroku](https://fruit-hunter.herokuapp.com/ "Link to another students game on heroku")
 
 [Back to top ⇧](#)
 
 ## Acknowledgements
 
-
+- I would like to thank my family for their valued opinions and critic during the process of design and development.
+- I would like to thank my tutor Seun, for their invaluable help and guidance throughout the process.
+- Lastly, I would like to extend my deepest gratitude to the amazing people in Slack who helped me rigorously test every aspect of my site.
 
 [Back to top ⇧](#)

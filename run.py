@@ -20,9 +20,8 @@ PHASE = "=" * 80
 
 
 def welcome_message():
-    """
-    The welcome_message function displays a welcome message every new game
-    """
+    # The welcome_message function displays a welcome message every new game
+
     print(
         """\
     \u001b[33m
@@ -85,10 +84,8 @@ BOTH OF YOU CANT SEE WHERE TO"
 
 
 def name_input():
-    """
-    The name_input function takes input from the user and stores it
-    in a variable that can be used further into the program
-    """
+    # The name_input function takes input from the user and stores it in a variable that can be used further into the program
+    
     print("WHAT SHALL YOU BE KNOWN BY CAPTAIN?")
     while True:
         player_name = input("PLEASE ENTER A NAME:\n").upper()
