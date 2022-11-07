@@ -46,7 +46,7 @@ Battleship is known worldwide as a pencil and paper game which dates from World 
 
 - The player enters their name and jumps straight into the action.
 - The player places their 5 ships on the board.
-- When all ships have been placed on the board the battle begins the player guesses the co-ordinates of the computers ships and the computer guesses where the player placed     their ships. 
+- When all ships have been placed on the board the battle begins the player guesses the co-ordinates of the computers ships and the computer guesses where the player placed their ships. 
 - The first to destroy all ships wins the game.
 
 [Back to top ⇧](#)
@@ -67,10 +67,8 @@ The ideal user for this website is:
 2. As a current user, I want the guess and hit the various ships.
 3. As a current user, I want the choice to use different ship sizes. 
 
-
 ### Development-Planes
 To create a command-line application that allows the user to play a classic game Battleships or Sea Battle is a strategy type guessing game for two players.
-
 
 #### Strategy
 Strategy incorporates user needs as well as product objectives. This website will focus on the following target audience, divided into three main categories:
@@ -86,7 +84,7 @@ Strategy incorporates user needs as well as product objectives. This website wil
     - Lifestyles:
         - Interest in games
         - Interest in battles
-        - Intrest in Ships
+        - Interest in Ships
         - Interest in puzzles
     - Personality/Attitudes:
         - Focused
@@ -95,7 +93,7 @@ Strategy incorporates user needs as well as product objectives. This website wil
     
 The application needs to enable the **user** to:
 - play the game "Battleship" using alpha characters and numbers.
-- generate a random board on each play-through placeing ships in differant locations.
+- generate a random board on each play-through placing ships in different locations.
     
 
 #### Scope
@@ -106,14 +104,12 @@ The scope plane is about defining requirements based on the goals established on
         - A consistent theme, and game play. 
 - Functionality Requirements:
     - The user will be able to:
-        - Enter co-ordanites using numbers and letters.
+        - Enter co-ordinates using numbers and letters.
         - Replay the game.
         - End the program at the end of the game.
 
-
 #### Structure
 The project will be deployed to a Heroku terminal. There will be no styling aside from the image of Funny Bones built using special characters within the terminal. 
-
 
 #### Skeleton
 A flowchart was created to show the logic the functions would follow.
@@ -125,16 +121,14 @@ A flowchart was created to show the logic the functions would follow.
 
 </details>
 
-
 [Back to top ⇧](#)
-
 
 ## Features
 
 ### Imagery
 The project uses the board class as my model. The game creates four boards the first to hold the players guesses the second to display the users board and the other two are the same but for the computers board.
 The board class stores the boards size (8), how many ships are on the board, the positions of the chosen ships on the board and information such as board type (player or computer board).
-The board class also runs functions such as the place_ship function so the player and computer can enter valid ship positions and a hit_count function to count all the hit ships on the board.
+The board class also runs functions such as the place ship function so the player and computer can enter valid ship positions and a hit count function to count all the hit ships on the board.
 
 ### Existing Features
 - The Welcome Message
@@ -164,7 +158,7 @@ The board class also runs functions such as the place_ship function so the playe
 - The Guess Board
     - Once the ships have been placed on each board the game play begins.
     - The player always goes first, their guess board is printed out to them for reference when entering a row and column, which must pass validation checks if not the user is prompted to enter valid data again. Once a valid input is entered the result of their attack is printed out to them before the guess board is updated and printed out to them again. The computers guess is printed out to the user alongside the computers board of where the player hit for reference to see where there shot landed. Validation checks prevent the user repeating already guessed spots on the board.
-    - The sleep method of the time library and phase/line break is used to seperate and emphasize the individual turns. There is a countdown of two seconds before the computer makes their attack and the terminal is updated this also adds more suspense.
+    - The sleep method of the time library and phase/line break is used to separate and emphasize the individual turns. There is a countdown of two seconds before the computer makes their attack and the terminal is updated this also adds more suspense.
 
 ![Guess ship](/assets/readme_files/guess-ship.png)
 ![Guess again](/assets/readme_files/guess-again.png)
@@ -177,7 +171,7 @@ The board class also runs functions such as the place_ship function so the playe
 ![Ship display](/assets/readme_files/ship-display.png)
 
 - Game Play Display
-    - Feedback to the user is provided constantly throught all phases of the game.
+    - Feedback to the user is provided constantly throughout all phases of the game.
     - All sequences are broken down to increase ease of use and clarity. The boards are updated appropriately as well as the hit counter incrementing when required.
     - A consistent use of the sleep method and phase/line breaks is also used throughout to increase ease of use and clarity.
 
@@ -204,14 +198,12 @@ The board class also runs functions such as the place_ship function so the playe
 The developer ran into several issues during the development of the website, with the noteworthy ones listed below, along with solutions or ideas to implement in the future.
 
 - Solved Bugs
-    - A bug I came across was the players error message for when placing a ship which overlaps over existing ships or dosen't fit the board was being printed when it was the computers turn to place its ships. I fixed it by using a for loop in the players turn of the place_ship function to print the message therefore no message would be printed if the computers ship overlapped or did not fit the board. 
-
+    - A bug I came across was the players error message for when placing a ship which overlaps over existing ships or doesn’t fit the board was being printed when it was the computers turn to place its ships. I fixed it by using a for loop in the players turn of the place ship function to print the message therefore no message would be printed if the computers ship overlapped or did not fit the board. 
 
 - Remaining Bugs
     - No bugs remaining.
 
 [Back to top ⇧](#)
-
 
 ## Technologies Used
 ### Main Languages Used
@@ -225,19 +217,17 @@ The developer ran into several issues during the development of the website, wit
 - [Lucid](https://lucid.app/ "Link to Lucid homepage")
     - Lucid was used to create a flowchart of information, making the logic of the game easily understood.
 - [Am I Responsive?](http://ami.responsivedesign.is/# "Link to Am I Responsive Homepage")
-    - Am I Responsive was used to generate mockup imagery of the terminal showing the game in use on Heroku.
+    - Am I Responsive was used to generate mock-up imagery of the terminal showing the game in use on Heroku.
 
 [Back to top ⇧](#)
-
 
 ## Testing
 ### Testing 
 Due to the nature of the project, testing has been implemented throughout the entire project mainly debugging through running the program in the terminal as well as debugging using the python debugger. This is shown by commits of refactoring code.
-Sections of code where developed before implementation to make sure it worked and also where run throught the PEP8 validator.
-Tested with invalid inputs: Such as using TypeErrors and ValueErrors, string instead of integers, out of bound inputs, same input twice.
+Sections of code where developed before implementation to make sure it worked and also where run through the PEP8 validator.
+Tested with invalid inputs: Such as using Type Errors and Value Errors, string instead of integers, out of bound inputs, same input twice.
 Tested in both Gitpod terminal and CI Heroku terminal.
 Limit testing has been conducted by myself, users and peers on slack through the peer-code-review channel, there is currently no reported issues that cause the game to break.
-
 
 #### New User Goals:
 1. As a new user, I want to see clear instructions for gameplay.
@@ -268,18 +258,17 @@ Limit testing has been conducted by myself, users and peers on slack through the
 Manual testing was conducted on the following elements that appear in the program:
      
 - Due to the nature of the project, testing has been implemented throughout the entire project mainly debugging through running the program in the terminal as well as debugging using the python debugger.
-- Sections of code where developed before implementation to make sure it worked and also where run throught the Python validator.
-Tested with invalid inputs: Such as using TypeErrors and ValueErrors, string instead of integers, out of bound inputs, same input twice.
+- Sections of code where developed before implementation to make sure it worked and also where run through the Python validator.
+Tested with invalid inputs: Such as using Type Errors and Value Errors, string instead of integers, out of bound inputs, same input twice.
 - Tested in both Gitpod terminal and CI Heroku terminal.
 - Limit testing has been conducted by myself, Family and peers on slack through the peer-code-review channel, there is currently no reported issues that cause the game to break.
-
 
 [Back to top ⇧](#)
 
 ## Automated Testing
 
 ### Code Validation
-The [PEP8 Online Checker](https://pep8online.com/) service was used to validate the code written in the run.py file.
+The [PEP8 Online Checker](https://extendsclass.com/python-tester.html/) service was used to validate the code written in the run.py file.
 
 **Results:**
 
@@ -290,10 +279,9 @@ The [PEP8 Online Checker](https://pep8online.com/) service was used to validate 
 
 </details>
 
-
 ## User testing 
 
-This was tested by some members of my family inculding my Mum and Sister and some people in the slack commuity were asked to review the site and documentation to point out any bugs and/or user experience issues. With there helpful advice and with guideance from my mentor throughout the process led to changes and improvements.
+This was tested by some members of my family including my Mum and Sister and some people in the slack community were asked to review the site and documentation to point out any bugs and/or user experience issues. Also with the helpful advice and with guidance from my mentor throughout the process led to changes and improvements.
 
 ## Deployment
 ### GitHub
@@ -306,7 +294,6 @@ This project was developed using [GitPod](https://www.gitpod.io/ "Link to GitPod
 5. You can select if you wish to make this project public or private.
 6. There is an option of adding a README file, a .gitignore file, or choosing a license.
 7. Click the 'Create Repository' button and your repository will be created.
-
 
 
 ### GitHub Forking and Cloning
@@ -334,7 +321,6 @@ To fork and clone the project, you will need to follow these steps:
         git clone https://hostname/YOUR-USERNAME/repo-name
     - Press Enter. Your local clone will be created.
 
-
 ### Deploying on Heroku
 To deploy this project to Heroku from its GitHub repository, the following steps were taken:
 
@@ -356,7 +342,6 @@ To deploy this project to Heroku from its GitHub repository, the following steps
 
 9. If you 'Enable Automatic Deploys', Heroku will rebuild the app every time you push a change to GitHub. You can also choose to manually deploy using the 'Deploy Branch' option. Heroku will build the app and when it is finished, click the 'View' button to open the terminal.
 
-
 ## Credits 
 
 The webpage [GitHub Docs - Fork a repo](https://docs.github.com/en/github-ae@latest/get-started/quickstart/fork-a-repo "Link to a GitHub Docs article on cloning and forking a repository") was used to get instructions on forking and cloning a repository. This information was used in the Deployment section of the README file.
@@ -373,7 +358,7 @@ The developer consulted multiple sites to better understand the code they were t
 ## Acknowledgements
 
 - I would like to thank my family for their valued opinions and critic during the process of design and development.
-- I would like to thank my tutor Seun, for their invaluable help and guidance throughout the process.
+- I would like to thank my tutor Seun, for their invaluable help and guidance throughout the process encouraging me to push myself and make a better project.
 - Lastly, I would like to extend my deepest gratitude to the amazing people in Slack who helped me rigorously test every aspect of my site.
 
 [Back to top ⇧](#)
