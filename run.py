@@ -18,7 +18,6 @@ letters_conversion = {"A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5, "G": 6, "H
 # The PHASE variable prints "=" 80 times as a line break.
 PHASE = "=" * 80
 
-
 def welcome_message():
     # The welcome_message function displays a welcome message every new game
 
@@ -85,7 +84,6 @@ BOTH OF YOU CANT SEE WHERE TO"
 
 def name_input():
     # The name_input function takes input from the user and stores it in a variable that can be used further into the program
-    
     print("WHAT SHALL YOU BE KNOWN BY CAPTAIN?")
     while True:
         player_name = input("PLEASE ENTER A NAME:\n").upper()
