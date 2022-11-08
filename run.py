@@ -51,12 +51,15 @@ def welcome_message():
     print(C("Welcome To Battleships!\n"))
     print(C("THE BOARD IS A GRID OF 8x8 WITH FIVE SHIPS TO SINK"))
     print(C("EACH PLAYER HAS 17 LIVES, THE FIRST TO STRIKE 17 BLOWS TO THE ENEMYS SHIPS WINS"))
-    print(BR * 4)
-    user_choice = input(' ' * 25 + 'Have you played before? Y/N: ').strip()
-    if user_choice.upper() == 'Y':
+    print(C('MENU'))
+    print(BR)
+    print(C('1. Play'))
+    print(C('2. Instrutions'))
+    user_input = input(' ' * 40).strip()
+    if user_input == '1':
         clear_console()
         name_input()
-    elif user_choice.upper() == 'N':
+    elif user_input == '2':
         clear_console()
         instructions()
 
@@ -100,13 +103,12 @@ BOTH OF YOU CANT SEE WHERE TO"
 
 def name_input():
     # The name_input function takes input from the user and stores it in a variable that can be used further into the program
-    print("WHAT SHALL YOU BE KNOWN BY CAPTAIN?")
+    print(C("WHAT SHALL YOU BE KNOWN BY CAPTAIN?"))
     while True:
-        player_name = input("PLEASE ENTER A NAME:\n").upper()
+        player_name = input(C("PLEASE ENTER A NAME:\n")).upper()
         if check_player_name(player_name):
             break
-    print(f"\nTHE NAME YOU CHOSE IS: CAPTAIN {player_name}\n")
-    print(PHASE)
+    print(C(f"\nTHE NAME YOU CHOSE IS: CAPTAIN {player_name}\n"))
     time.sleep(1)
     print(" ")
     return player_name
@@ -118,10 +120,10 @@ def check_player_name(name):
     than 10 or not long enough. Then it tells the player to enter a valid name
     """
     if len(name) > 10:
-        print("INVALID NAME. 10 CHARACTERS MAX")
+        print(C("INVALID NAME. 10 CHARACTERS MAX"))
         return False
     elif len(name) == 0:
-        print("INVALID NAME. NOT LONG ENOUGH")
+        print(C("INVALID NAME. NOT LONG ENOUGH"))
     else:
         return True
 
@@ -173,10 +175,10 @@ def place_ship(board):
                     # check if ship overlaps
                     if ship_overlap(board, row, column, orientation, ship_length):
                         print(PHASE)
-                        print("THE SHIP DOSENT FIT HERE CAPTAIN\n")
+                        print(C("THE SHIP DOSENT FIT HERE CAPTAIN\n"))
                     else:
                         print(PHASE)
-                        print("EXCELLENT POSITIONING OF THE SHIP CAPTAIN\n")
+                        print(C("EXCELLENT POSITIONING OF THE SHIP CAPTAIN\n"))
                         # place ship
                         if orientation == "H":
                             for i in range(column, column + ship_length):
@@ -305,10 +307,12 @@ def turn(board):
             turn(board)
         elif COMPUTER_BOARD[row][column] == "@":
             board[row][column] = "\u001b[32mX\u001b[0m"
-            print("WE HIT THEM, GREAT SHOT CAPTAIN")
+            print(C("\033[93m WE HIT THEM, GREAT SHOT CAPTAIN"))
+            print(BR * 4)
         else:
             board[row][column] = "\u001b[31m0\u001b[0m"
-            print("WE MISSED, WE WILL GET THEM ON THE NEXT SHOT")
+            print(C("\033[93m WE MISSED, WE WILL GET THEM ON THE NEXT SHOT"))
+            print(BR * 4)
     else:
         row, column = random.randint(0, 7), random.randint(0, 7)
         if board[row][column] == "\u001b[31m0\u001b[0m":
@@ -317,12 +321,16 @@ def turn(board):
             turn(board)
         elif PLAYER_BOARD[row][column] == "@":
             board[row][column] = "\u001b[32mX\u001b[0m"
-            print("WE ARE HIT, FIRE BACK!")
-            print("COMPUTERS BOARD \n")
+            print("\033[93m WE ARE HIT, FIRE BACK!")
+            print(BR * 4)
+            print("\033[93m COMPUTERS BOARD \n")
+            print(BR * 4)
         else:
             board[row][column] = "\u001b[31m0\u001b[0m"
-            print("THE COMPUTER MISSED, PHEW...\n")
-            print("COMPUTERS BOARD \n")
+            print(C("\033[93m [THE COMPUTER MISSED, PHEW...\n"))
+            print(BR * 4)
+            print(C("\033[93m COMPUTERS BOARD \n"))
+            print(BR * 4)
 
 
 def start_game():
@@ -346,13 +354,14 @@ def start_game():
         # Player turn
         while True:
             print(PHASE)
-            print("GUESS A BATTLESHIP LOCATION CAPTAIN!\n")
+            print(C("GUESS A BATTLESHIP LOCATION CAPTAIN!\n"))
             print_board(PLAYER_GUESS_BOARD)
             turn(PLAYER_GUESS_BOARD)
             time.sleep(2)
             break
         if hit_count(PLAYER_GUESS_BOARD) == 17:
-            print("\u001b[32mYOU WON!\u001b[0m, BRILLIANT SHOOTING CAPTAIN")
+            print(C("\u001b[32mYOU WON!\u001b[0m, BRILLIANT SHOOTING CAPTAIN"))
+            print(BR * 4)
             break
         # Computer turn
         while True:
@@ -361,9 +370,8 @@ def start_game():
             break
         print_board(COMPUTER_GUESS_BOARD)
         if hit_count(COMPUTER_GUESS_BOARD) == 17:
-            print(
-                "UNLUCKY \u001b[31mYOU LOSE\u001b[0m CAPTAIN, WE WILL GET THEM\n NEXT TIME"
-            )
+            print(C("UNLUCKY \u001b[31mYOU LOSE\u001b[0m CAPTAIN, WE WILL GET THEM\n NEXT TIME"))
+            print(BR * 4)
             break
 
 
