@@ -30,6 +30,7 @@ def clear_console():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def welcome_message():
+    clear_console()
     # The welcome_message function displays a welcome message every new game
     print(
         """\
