@@ -134,11 +134,11 @@ def print_board(board):
     """
     The print_board function prints out the battleship board
     """
-    print(C("  A B C D E F G H"))
-    print(C("  ---------------"))
+    print("  A B C D E F G H")
+    print("  ---------------")
     row_number = 1
     for row in board:
-        print(C("%d|%s|" % (row_number, "|".join(row))))
+        print("%d|%s|" % (row_number, "|".join(row)))
         row_number += 1
 
 
@@ -310,11 +310,11 @@ def turn(board):
         elif COMPUTER_BOARD[row][column] == "@":
             board[row][column] = "\u001b[32mX\u001b[0m"
             print(C("\033[93m WE HIT THEM, GREAT SHOT CAPTAIN"))
-            print(BR * 4)
+            print(BR * 2)
         else:
             board[row][column] = "\u001b[31m0\u001b[0m"
             print(C("\033[93m WE MISSED, WE WILL GET THEM ON THE NEXT SHOT"))
-            print(BR * 4)
+            print(BR * 2)
     else:
         row, column = random.randint(0, 7), random.randint(0, 7)
         if board[row][column] == "\u001b[31m0\u001b[0m":
@@ -324,15 +324,15 @@ def turn(board):
         elif PLAYER_BOARD[row][column] == "@":
             board[row][column] = "\u001b[32mX\u001b[0m"
             print(C("\033[93m WE ARE HIT, FIRE BACK!"))
-            print(BR * 4)
+            print(BR * 2)
             print(C("\033[93m COMPUTERS BOARD \n"))
-            print(BR * 4)
+            print(BR * 2)
         else:
             board[row][column] = "\u001b[31m0\u001b[0m"
-            print(C("\033[93m [THE COMPUTER MISSED, PHEW...\n"))
-            print(BR * 4)
-            print(C("\033[93m COMPUTERS BOARD \n"))
-            print(BR * 4)
+            print(C("\033[93m THE COMPUTER MISSED, PHEW...\n"))
+            print(BR * 2)
+            print(C("\033[93m COMPUTERS BOARD\033\n"))
+            print(BR * 2)
 
 
 def start_game():
@@ -364,7 +364,8 @@ def start_game():
             break
         if hit_count(PLAYER_GUESS_BOARD) == 17:
             print(C("\u001b[32mYOU WON!\u001b[0m, BRILLIANT SHOOTING CAPTAIN"))
-            print(BR * 4)
+            print(BR * 2)
+            play_again()
             break
         # Computer turn
         while True:
@@ -374,7 +375,8 @@ def start_game():
         print_board(COMPUTER_GUESS_BOARD)
         if hit_count(COMPUTER_GUESS_BOARD) == 17:
             print(C("UNLUCKY \u001b[31mYOU LOSE\u001b[0m CAPTAIN, WE WILL GET THEM\n NEXT TIME"))
-            print(BR * 4)
+            print(BR * 2)
+            play_again()
             break
 
 
