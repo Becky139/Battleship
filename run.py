@@ -50,7 +50,7 @@ def welcome_message():
     # Welcome Message
     print(C("Welcome To Battleships!\n"))
     print(C("THE BOARD IS A GRID OF 8x8 WITH FIVE SHIPS TO SINK"))
-    print(C("EACH PLAYER HAS 17 LIVES, THE FIRST TO STRIKE 17 BLOWS TO THE ENEMYS SHIPS WINS"))
+    print(C("EACH PLAYER HAS 17 LIVES, THE FIRST TO STRIKE 17 BLOWS TO THE ENEMY'S SHIPS WINS"))
     print(C('MENU'))
     print(BR)
     print(C('1. Play'))
@@ -65,7 +65,7 @@ def welcome_message():
 
     # Instructions
 def instructions():
-    print(C("\u001b[31mINSTRUCTIONS:\u001b[0m \n"))
+    print(C("INSTRUCTIONS: \n"))
     print(C(
         "THE FIRST PLAYER TO GET A HIT COUNT OF 17 HITS DESTROYING ALL ENEMY \
 SHIPS WINS"
@@ -80,18 +80,18 @@ BOTH OF YOU CANT SEE WHERE TO"
     ))
     print(C("SHOOT... BUT THAT SHOULDNT BE MUCH OF A PROBLEM."))
     print(C("THE RULES ARE AS FOLLOWS: \n"))
-    print(C("SHIPS: \n"))
-    print(C("\u001b[36mDESTROYER\u001b[0m - SIZE OF 2 ON THE BOARD\n"))
-    print(C("\u001b[35mSUBMARINE\u001b[0m - SIZE OF 3 ON THE BOARD\n"))
-    print(C("\u001b[33mCRUISER\u001b[0m - SIZE OF 3 ON THE BOARD\n"))
-    print(C("\u001b[32mBATTLESHIP\u001b[0m - SIZE OF 4 ON THE BOARD\n"))
-    print(C("\u001b[34mCARRIER\u001b[0m - SIZE OF 5 ON THE BOARD\n"))
+    print(C("\u001b[37mSHIPS:\u001b[0m"))
+    print(C("\u001b[36mDESTROYER\u001b[0m - SIZE OF 2 ON THE BOARD"))
+    print(C("\u001b[35mSUBMARINE\u001b[0m - SIZE OF 3 ON THE BOARD"))
+    print(C("\u001b[33mCRUISER\u001b[0m - SIZE OF 3 ON THE BOARD"))
+    print(C("\u001b[32mBATTLESHIP\u001b[0m - SIZE OF 4 ON THE BOARD"))
+    print(C("\u001b[34mCARRIER\u001b[0m - SIZE OF 5 ON THE BOARD \n"))
 
     # Instructions - Markers
-    print(C("\u001b[37m\u001b[0m MARKERS: \n"))
-    print(C("\u001b[37m@\u001b[0m IS A SHIP \n"))
-    print(C("\u001b[31m0\u001b[0m IS A MISS \n"))
-    print(C("\u001b[32mX\u001b[0m IS A HIT/SUNK SHIP \n"))
+    print(C("\u001b[37m\u001b[0m MARKERS:"))
+    print(C("\u001b[37m@\u001b[0m IS A SHIP "))
+    print(C("\u001b[31m0\u001b[0m IS A MISS "))
+    print(C("\u001b[32mX\u001b[0m IS A HIT/SUNK SHIP"))
     user_choice = input(' ' * 15 + 'Are you ready to play Battleships? Y/N: ').strip()
     if user_choice.upper() == 'Y':
         clear_console()
@@ -108,10 +108,11 @@ def name_input():
         player_name = input(C("PLEASE ENTER A NAME:\n")).upper()
         if check_player_name(player_name):
             break
-    print(C(f"\nTHE NAME YOU CHOSE IS: CAPTAIN {player_name}\n"))
+    print(C(f"THE NAME YOU CHOSE IS: CAPTAIN {player_name}\n"))
     time.sleep(1)
     print(" ")
-    return player_name
+    return start_game()
+        
 
 
 def check_player_name(name):
@@ -132,11 +133,11 @@ def print_board(board):
     """
     The print_board function prints out the battleship board
     """
-    print("  A B C D E F G H")
-    print("  ---------------")
+    print(C("  A B C D E F G H"))
+    print(C("  ---------------"))
     row_number = 1
     for row in board:
-        print("%d|%s|" % (row_number, "|".join(row)))
+        print(C("%d|%s|" % (row_number, "|".join(row))))
         row_number += 1
 
 
@@ -230,55 +231,55 @@ def user_input(place_ship):
     if place_ship == True:
         while True:
             try:
-                orientation = input("Enter orientation (H or V): \n").upper()
+                orientation = input(C("Enter orientation (H or V): \n")).upper()
                 if orientation == "H" or orientation == "V":
                     break
                 else:
                     raise ValueError
             except ValueError:
-                print("Please enter a valid orientaion (H or V)")
+                print(C("Please enter a valid orientaion (H or V)"))
         while True:
             try:
-                row = input("Enter the row of the ship 1-8: \n")
+                row = input(C("Enter the row of the ship 1-8: \n"))
                 if row in "12345678":
                     row = int(row) - 1
                     break
                 else:
                     raise ValueError
             except ValueError:
-                print("Please enter a valid letter between 1-8")
+                print(C("Please enter a valid letter between 1-8"))
         while True:
             try:
-                column = input("Enter the column of the ship A-H: \n").upper()
+                column = input(C("Enter the column of the ship A-H: \n")).upper()
                 if column not in "ABCDEFGH":
-                    print("Please enter a valid letter between A-H")
+                    print(C("Please enter a valid letter between A-H"))
                 else:
                     column = letters_conversion[column]
                     break
             except KeyError:
-                print("Please enter a valid letter between A-H")
+                print(C("Please enter a valid letter between A-H"))
         return row, column, orientation
     else:
         while True:
             try:
-                row = input("Enter the row of the ship 1-8: \n")
+                row = input(C("Enter the row of the ship 1-8: \n"))
                 if row in "12345678":
                     row = int(row) - 1
                     break
                 else:
                     raise ValueError
             except ValueError:
-                print("Please enter a valid letter between 1-8")
+                print(C("Please enter a valid letter between 1-8"))
         while True:
             try:
-                column = input("Enter the column of the ship A-H: \n").upper()
+                column = input(C("Enter the column of the ship A-H: \n")).upper()
                 if column not in "ABCDEFGH":
-                    print("Please enter a valid letter between A-H")
+                    print(C("Please enter a valid letter between A-H"))
                 else:
                     column = letters_conversion[column]
                     break
             except KeyError:
-                print("Please enter a valid letter between A-H")
+                print(C("Please enter a valid letter between A-H"))
         return row, column
 
 
