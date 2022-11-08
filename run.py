@@ -385,8 +385,8 @@ def play_again():
     """
     Asks the player if they want to play again or quit
     """
-    print("WOULD YOU LIKE TO PLAY AGAIN?\n")
-    answer = input("ENTER Y OR N: \n").upper()
+    print(C("WOULD YOU LIKE TO PLAY AGAIN?\n"))
+    answer = input(C("ENTER Y OR N: \n")).upper()
     print(" ")
     while True:
         if answer == "Y":
@@ -395,15 +395,15 @@ def play_again():
             welcome_message()
         elif answer == "N":
             print(" ")
-            print("GOODBYE!, SEE YOU SOON CAPTAIN")
+            print(C("GOODBYE!, SEE YOU SOON CAPTAIN"))
             print(" ")
             print(PHASE)
             return False
             welcome_message()
         else:
             print(" ")
-            print("PLEASE ENTER Y OR N")
-            answer = input("ENTER Y OR N: \n").upper()
+            print(C("PLEASE ENTER Y OR N"))
+            answer = input(C("ENTER Y OR N: \n")).upper()
 
 
 if __name__ == "__main__":
