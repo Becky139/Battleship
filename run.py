@@ -111,6 +111,7 @@ def name_input():
     print(C(f"THE NAME YOU CHOSE IS: CAPTAIN {player_name}\n"))
     time.sleep(1)
     print(" ")
+    clear_console()
     return start_game()
         
 
@@ -170,7 +171,7 @@ def place_ship(board):
                         break
             else:
                 place_ship = True
-                print("Place the ship with a length of " + str(ship_length))
+                print(C("Place the ship with a length of " + str(ship_length)))
                 row, column, orientation = user_input(place_ship)
                 if fit_ship_check(ship_length, row, column, orientation):
                     # check if ship overlaps
@@ -322,9 +323,9 @@ def turn(board):
             turn(board)
         elif PLAYER_BOARD[row][column] == "@":
             board[row][column] = "\u001b[32mX\u001b[0m"
-            print("\033[93m WE ARE HIT, FIRE BACK!")
+            print(C("\033[93m WE ARE HIT, FIRE BACK!"))
             print(BR * 4)
-            print("\033[93m COMPUTERS BOARD \n")
+            print(C("\033[93m COMPUTERS BOARD \n"))
             print(BR * 4)
         else:
             board[row][column] = "\u001b[31m0\u001b[0m"
@@ -338,9 +339,10 @@ def start_game():
     """
     Start game function
     """
-    start_key = input("PRESS P TO START GAME: \n").upper()
+    start_key = input(C("PRESS P TO START GAME: \n")).upper()
     while start_key != "P":
-        start_key = input("PRESS P TO START GAME: \n").upper()
+        start_key = input(C("PRESS P TO START GAME: \n")).upper()
+    clear_console()
     print(PHASE)
     # Computer places ships
     place_ship(COMPUTER_BOARD)
