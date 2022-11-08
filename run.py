@@ -17,38 +17,32 @@ letters_conversion = {"A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5, "G": 6, "H
 
 # The PHASE variable prints "=" 80 times as a line break.
 PHASE = "=" * 80
+C = '{:^80}'.format
+BR = '\n'
 
 def welcome_message():
     # The welcome_message function displays a welcome message every new game
-
     print(
         """\
     \u001b[33m
-  ____        _   _   _           _     _           
- |  _ \      | | | | | |         | |   (_)          
- | |_) | __ _| |_| |_| | ___  ___| |__  _ _ __  ___ 
- |  _ < / _` | __| __| |/ _ \/ __| '_ \| | '_ \/ __|
- | |_) | (_| | |_| |_| |  __/\__ \ | | | | |_) \__ |
- |____/ \__,_|\__|\__|_|\___||___/_| |_|_| .__/|___/
-                                         | |        
-                                         |_| 
+               ____        _   _   _           _     _           
+              |  _ \      | | | | | |         | |   (_)          
+              | |_) | __ _| |_| |_| | ___  ___| |__  _ _ __  ___ 
+              |  _ < / _` | __| __| |/ _ \/ __| '_ \| | '_ \/ __|
+              | |_) | (_| | |_| |_| |  __/\__ \ | | | | |_) \__ |
+              |____/ \__,_|\__|\__|_|\___||___/_| |_|_| .__/|___/
+                                                      | |        
+                                                      |_| 
 \u001b[0m       
 """
     )
 
     # Welcome Message
-    print("\nWelcome To Battleships!\n")
-    print("THE BOARD IS A GRID OF 8x8 WITH FIVE SHIPS TO SINK")
-    print(
-        "\u001b[34mCARRIER - \u001b[32mBATTLESHIP - \
-\u001b[33mCRUISER - \u001b[35mSUBMARINE - \u001b[36mDESTROYER\
-    \u001b[0m"
-    )
-    print(
-        "EACH PLAYER HAS 17 LIVES, \
-THE FIRST TO STRIKE 17 BLOWS TO THE ENEMYS SHIPS WINS\n"
-    )
-    time.sleep(5)
+    print(C("Welcome To Battleships!\n"))
+    print(C("THE BOARD IS A GRID OF 8x8 WITH FIVE SHIPS TO SINK"))
+    print(C("EACH PLAYER HAS 17 LIVES, THE FIRST TO STRIKE 17 BLOWS TO THE ENEMYS SHIPS WINS\n"))
+    print(BR * 4)
+    time.sleep(10)
     print(PHASE)
 
     # Instructions
