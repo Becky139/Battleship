@@ -1,6 +1,7 @@
 # Libraries
 import random
 import time
+import os  # credit to stackoverflow.com
 
 # Player and computer board variables
 PLAYER_BOARD = [[" "] * 8 for i in range(8)]
@@ -19,6 +20,14 @@ letters_conversion = {"A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5, "G": 6, "H
 PHASE = "=" * 80
 C = '{:^80}'.format
 BR = '\n'
+
+def clear_console():
+    """
+    Clears the console.
+    """
+    # This line is credited to
+    # https://stackoverflow.com/questions/2084508/clear-terminal-in-python
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 def welcome_message():
     # The welcome_message function displays a welcome message every new game
@@ -40,40 +49,52 @@ def welcome_message():
     # Welcome Message
     print(C("Welcome To Battleships!\n"))
     print(C("THE BOARD IS A GRID OF 8x8 WITH FIVE SHIPS TO SINK"))
-    print(C("EACH PLAYER HAS 17 LIVES, THE FIRST TO STRIKE 17 BLOWS TO THE ENEMYS SHIPS WINS\n"))
+    print(C("EACH PLAYER HAS 17 LIVES, THE FIRST TO STRIKE 17 BLOWS TO THE ENEMYS SHIPS WINS"))
     print(BR * 4)
-    time.sleep(10)
-    print(PHASE)
+    user_choice = input(' ' * 25 + 'Have you played before? Y/N: ').strip()
+    if user_choice.upper() == 'Y':
+        clear_console()
+        name_input()
+    elif user_choice.upper() == 'N':
+        clear_console()
+        instructions()
 
     # Instructions
-    print("\u001b[31mINSTRUCTIONS:\u001b[0m \n")
-    print(
+def instructions():
+    print(C("\u001b[31mINSTRUCTIONS:\u001b[0m \n"))
+    print(C(
         "THE FIRST PLAYER TO GET A HIT COUNT OF 17 HITS DESTROYING ALL ENEMY \
 SHIPS WINS"
-    )
-    print(
+    ))
+    print(C(
         "THE AIM OF THE GAME IS TO DESTROY THE AI \
 ENEMY BY DESTROYING ALL THEIR SHIPS"
-    )
-    print(
+    ))
+    print(C(
         "BEFORE THEY DESTROY YOURS. THE THING IS WELL \
 BOTH OF YOU CANT SEE WHERE TO"
-    )
-    print("SHOOT... BUT THAT SHOULDNT BE MUCH OF A PROBLEM.")
-    print("THE RULES ARE AS FOLLOWS: \n")
-    print("SHIPS: \n")
-    print("\u001b[36mDESTROYER\u001b[0m - SIZE OF 2 ON THE BOARD\n")
-    print("\u001b[35mSUBMARINE\u001b[0m - SIZE OF 3 ON THE BOARD\n")
-    print("\u001b[33mCRUISER\u001b[0m - SIZE OF 3 ON THE BOARD\n")
-    print("\u001b[32mBATTLESHIP\u001b[0m - SIZE OF 4 ON THE BOARD\n")
-    print("\u001b[34mCARRIER\u001b[0m - SIZE OF 5 ON THE BOARD\n")
+    ))
+    print(C("SHOOT... BUT THAT SHOULDNT BE MUCH OF A PROBLEM."))
+    print(C("THE RULES ARE AS FOLLOWS: \n"))
+    print(C("SHIPS: \n"))
+    print(C("\u001b[36mDESTROYER\u001b[0m - SIZE OF 2 ON THE BOARD\n"))
+    print(C("\u001b[35mSUBMARINE\u001b[0m - SIZE OF 3 ON THE BOARD\n"))
+    print(C("\u001b[33mCRUISER\u001b[0m - SIZE OF 3 ON THE BOARD\n"))
+    print(C("\u001b[32mBATTLESHIP\u001b[0m - SIZE OF 4 ON THE BOARD\n"))
+    print(C("\u001b[34mCARRIER\u001b[0m - SIZE OF 5 ON THE BOARD\n"))
+
     # Instructions - Markers
-    print("MARKERS: \n")
-    print("@ IS A SHIP")
-    print("\u001b[31m0\u001b[0m IS A MISS")
-    print("\u001b[32mX\u001b[0m IS A HIT/SUNK SHIP")
-    time.sleep(5)
-    print(PHASE)
+    print(C("\u001b[37m\u001b[0m MARKERS: \n"))
+    print(C("\u001b[37m@\u001b[0m IS A SHIP \n"))
+    print(C("\u001b[31m0\u001b[0m IS A MISS \n"))
+    print(C("\u001b[32mX\u001b[0m IS A HIT/SUNK SHIP \n"))
+    user_choice = input(' ' * 15 + 'Are you ready to play Battleships? Y/N: ').strip()
+    if user_choice.upper() == 'Y':
+        clear_console()
+        name_input()
+    elif user_choice.upper() == 'N':
+        clear_console()
+        welcome_message()
 
 
 def name_input():
