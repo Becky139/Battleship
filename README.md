@@ -117,7 +117,7 @@ A flowchart was created to show the logic the functions would follow.
 <details>
 <summary>Flowchart</summary>
     
-![Flowchart](assets/readme_files/battleship_chart.png)
+![Flowchart](assets/readme_files/battleship-flowchart.png)
 
 </details>
 
