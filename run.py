@@ -309,11 +309,11 @@ def turn(board):
             turn(board)
         elif COMPUTER_BOARD[row][column] == "@":
             board[row][column] = "\u001b[32mX\u001b[0m"
-            print(C("\033[93m WE HIT THEM, GREAT SHOT CAPTAIN"))
+            print(C("\u001b[33m WE HIT THEM, GREAT SHOT CAPTAIN\u001b[0m"))
             print(BR * 2)
         else:
             board[row][column] = "\u001b[31m0\u001b[0m"
-            print(C("\033[93m WE MISSED, WE WILL GET THEM ON THE NEXT SHOT"))
+            print(C("\u001b[33m WE MISSED, WE WILL GET THEM ON THE NEXT SHOT\u001b[0m"))
             print(BR * 2)
     else:
         row, column = random.randint(0, 7), random.randint(0, 7)
@@ -323,16 +323,14 @@ def turn(board):
             turn(board)
         elif PLAYER_BOARD[row][column] == "@":
             board[row][column] = "\u001b[32mX\u001b[0m"
-            print(C("\033[93m WE ARE HIT, FIRE BACK!"))
+            print(C("\u001b[33m WE ARE HIT, FIRE BACK!\u001b[0m"))
             print(BR * 2)
-            print(C("\033[93m COMPUTERS BOARD \n"))
-            print(BR * 2)
+            print(C("COMPUTERS BOARD\n"))
         else:
             board[row][column] = "\u001b[31m0\u001b[0m"
-            print(C("\033[93m THE COMPUTER MISSED, PHEW...\n"))
+            print(C("\u001b[33m THE COMPUTER MISSED, PHEW...\u001b[0m\n"))
             print(BR * 2)
-            print(C("\033[93m COMPUTERS BOARD\033\n"))
-            print(BR * 2)
+            print(C("COMPUTERS BOARD\n"))
 
 
 def start_game():
