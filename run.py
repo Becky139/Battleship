@@ -134,11 +134,11 @@ def print_board(board):
     """
     The print_board function prints out the battleship board
     """
-    print("  A B C D E F G H")
-    print("  ---------------")
+    print(C("  A B C D E F G H"))
+    print(C("  ---------------"))
     row_number = 1
     for row in board:
-        print("%d|%s|" % (row_number, "|".join(row)))
+        print(C("%d|%s|" % (row_number, "|".join(row))))
         row_number += 1
 
 
@@ -292,7 +292,7 @@ def hit_count(board):
     count = 0
     for row in board:
         for column in row:
-            if column == "\u001b[32mX\u001b[0m":
+            if column == "X":
                 count += 1
     return count
 
@@ -303,31 +303,31 @@ def turn(board):
     """
     if board == PLAYER_GUESS_BOARD:
         row, column = user_input(PLAYER_GUESS_BOARD)
-        if board[row][column] == "\u001b[31m0\u001b[0m":
+        if board[row][column] == "0":
             turn(board)
-        elif board[row][column] == "\u001b[32mX\u001b[0m":
+        elif board[row][column] == "X":
             turn(board)
         elif COMPUTER_BOARD[row][column] == "@":
-            board[row][column] = "\u001b[32mX\u001b[0m"
+            board[row][column] = "X"
             print(C("\u001b[33m WE HIT THEM, GREAT SHOT CAPTAIN\u001b[0m"))
             print(BR * 2)
         else:
-            board[row][column] = "\u001b[31m0\u001b[0m"
+            board[row][column] = "0"
             print(C("\u001b[33m WE MISSED, WE WILL GET THEM ON THE NEXT SHOT\u001b[0m"))
             print(BR * 2)
     else:
         row, column = random.randint(0, 7), random.randint(0, 7)
-        if board[row][column] == "\u001b[31m0\u001b[0m":
+        if board[row][column] == "0":
             turn(board)
-        elif board[row][column] == "\u001b[32mX\u001b[0m":
+        elif board[row][column] == "X":
             turn(board)
         elif PLAYER_BOARD[row][column] == "@":
-            board[row][column] = "\u001b[32mX\u001b[0m"
+            board[row][column] = "X"
             print(C("\u001b[33m WE ARE HIT, FIRE BACK!\u001b[0m"))
             print(BR * 2)
             print(C("COMPUTERS BOARD\n"))
         else:
-            board[row][column] = "\u001b[31m0\u001b[0m"
+            board[row][column] = "0"
             print(C("\u001b[33m THE COMPUTER MISSED, PHEW...\u001b[0m\n"))
             print(BR * 2)
             print(C("COMPUTERS BOARD\n"))
