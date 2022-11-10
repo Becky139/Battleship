@@ -18,8 +18,9 @@ letters_conversion = {"A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5, "G": 6, "H
 
 # The PHASE variable prints "=" 80 times as a line break.
 PHASE = "=" * 80
-C = '{:^80}'.format
-BR = '\n'
+C = "{:^80}".format
+BR = "\n"
+
 
 def clear_console():
     """
@@ -27,7 +28,8 @@ def clear_console():
     """
     # This line is credited to
     # https://stackoverflow.com/questions/2084508/clear-terminal-in-python
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system("cls" if os.name == "nt" else "clear")
+
 
 def welcome_message():
     clear_console()
@@ -50,53 +52,65 @@ def welcome_message():
     # Welcome Message
     print(C("Welcome To Battleships!\n"))
     print(C("THE BOARD IS A GRID OF 8x8 WITH FIVE SHIPS TO SINK"))
-    print(C("EACH PLAYER HAS 17 LIVES, THE FIRST TO STRIKE 17 BLOWS TO THE ENEMY'S SHIPS WINS"))
-    print(C('MENU'))
+    print(
+        C(
+            "EACH PLAYER HAS 17 LIVES, THE FIRST TO STRIKE 17 BLOWS TO THE ENEMY'S SHIPS WINS"
+        )
+    )
+    print(C("MENU"))
     print(BR)
-    print(C('1. Play'))
-    print(C('2. Instrutions'))
-    user_input = input(' ' * 40).strip()
-    if user_input == '1':
+    print(C("1. Play"))
+    print(C("2. Instrutions"))
+    user_input = input(" " * 40).strip()
+    if user_input == "1":
         clear_console()
         name_input()
-    elif user_input == '2':
+    elif user_input == "2":
         clear_console()
         instructions()
 
     # Instructions
+
+
 def instructions():
     print(C("INSTRUCTIONS: \n"))
-    print(C(
-        "THE FIRST PLAYER TO GET A HIT COUNT OF 17 HITS DESTROYING ALL ENEMY \
+    print(
+        C(
+            "THE FIRST PLAYER TO GET A HIT COUNT OF 17 HITS DESTROYING ALL ENEMY \
 SHIPS WINS"
-    ))
-    print(C(
-        "THE AIM OF THE GAME IS TO DESTROY THE AI \
+        )
+    )
+    print(
+        C(
+            "THE AIM OF THE GAME IS TO DESTROY THE AI \
 ENEMY BY DESTROYING ALL THEIR SHIPS"
-    ))
-    print(C(
-        "BEFORE THEY DESTROY YOURS. THE THING IS WELL \
+        )
+    )
+    print(
+        C(
+            "BEFORE THEY DESTROY YOURS. THE THING IS WELL \
 BOTH OF YOU CANT SEE WHERE TO"
-    ))
+        )
+    )
     print(C("SHOOT... BUT THAT SHOULDNT BE MUCH OF A PROBLEM."))
     print(C("THE RULES ARE AS FOLLOWS: \n"))
-    print(C("\u001b[37mSHIPS:\u001b[0m"))
-    print(C("\u001b[36mDESTROYER\u001b[0m - SIZE OF 2 ON THE BOARD"))
-    print(C("\u001b[35mSUBMARINE\u001b[0m - SIZE OF 3 ON THE BOARD"))
-    print(C("\u001b[33mCRUISER\u001b[0m - SIZE OF 3 ON THE BOARD"))
-    print(C("\u001b[32mBATTLESHIP\u001b[0m - SIZE OF 4 ON THE BOARD"))
-    print(C("\u001b[34mCARRIER\u001b[0m - SIZE OF 5 ON THE BOARD \n"))
+    print(C(" " * 10 + "\u001b[37mSHIPS:\u001b[0m"))
+    print(C(" " * 10 + "\u001b[36mDESTROYER\u001b[0m - SIZE OF 2 ON THE BOARD"))
+    print(C(" " * 10 + "\u001b[35mSUBMARINE\u001b[0m - SIZE OF 3 ON THE BOARD"))
+    print(C(" " * 10 + "\u001b[33mCRUISER\u001b[0m - SIZE OF 3 ON THE BOARD"))
+    print(C(" " * 10 + "\u001b[32mBATTLESHIP\u001b[0m - SIZE OF 4 ON THE BOARD"))
+    print(C(" " * 10 + "\u001b[34mCARRIER\u001b[0m - SIZE OF 5 ON THE BOARD \n"))
 
     # Instructions - Markers
-    print(C("\u001b[37m\u001b[0m MARKERS:"))
-    print(C("\u001b[37m@\u001b[0m IS A SHIP "))
-    print(C("\u001b[31m0\u001b[0m IS A MISS "))
-    print(C("\u001b[32mX\u001b[0m IS A HIT/SUNK SHIP"))
-    user_choice = input(' ' * 15 + 'Are you ready to play Battleships? Y/N: ').strip()
-    if user_choice.upper() == 'Y':
+    print(C("MARKERS:"))
+    print(C("@ IS A SHIP "))
+    print(C("0 IS A MISS "))
+    print(C("X IS A HIT/SUNK SHIP"))
+    user_choice = input(" " * 20 + "Are you ready to play Battleships? Y/N: ").strip()
+    if user_choice.upper() == "Y":
         clear_console()
         name_input()
-    elif user_choice.upper() == 'N':
+    elif user_choice.upper() == "N":
         clear_console()
         welcome_message()
 
@@ -113,7 +127,6 @@ def name_input():
     print(" ")
     clear_console()
     return start_game()
-        
 
 
 def check_player_name(name):
@@ -309,11 +322,11 @@ def turn(board):
             turn(board)
         elif COMPUTER_BOARD[row][column] == "@":
             board[row][column] = "X"
-            print(C("\u001b[33m WE HIT THEM, GREAT SHOT CAPTAIN\u001b[0m"))
+            print(C(" " * 10 + "\u001b[33m WE HIT THEM, GREAT SHOT CAPTAIN\u001b[0m"))
             print(BR * 2)
         else:
             board[row][column] = "0"
-            print(C("\u001b[33m WE MISSED, WE WILL GET THEM ON THE NEXT SHOT\u001b[0m"))
+            print(C(" " * 10 + "\u001b[33m WE MISSED, WE WILL GET THEM ON THE NEXT SHOT\u001b[0m"))
             print(BR * 2)
     else:
         row, column = random.randint(0, 7), random.randint(0, 7)
@@ -323,12 +336,12 @@ def turn(board):
             turn(board)
         elif PLAYER_BOARD[row][column] == "@":
             board[row][column] = "X"
-            print(C("\u001b[33m WE ARE HIT, FIRE BACK!\u001b[0m"))
+            print(C(" " * 10 + "\u001b[33m WE ARE HIT, FIRE BACK!\u001b[0m"))
             print(BR * 2)
             print(C("COMPUTERS BOARD\n"))
         else:
             board[row][column] = "0"
-            print(C("\u001b[33m THE COMPUTER MISSED, PHEW...\u001b[0m\n"))
+            print(C(" " * 10 + "\u001b[33m THE COMPUTER MISSED, PHEW...\u001b[0m\n"))
             print(BR * 2)
             print(C("COMPUTERS BOARD\n"))
 
@@ -361,7 +374,7 @@ def start_game():
             time.sleep(2)
             break
         if hit_count(PLAYER_GUESS_BOARD) == 17:
-            print(C("\u001b[32mYOU WON!\u001b[0m, BRILLIANT SHOOTING CAPTAIN"))
+            print(C(" " * 10 + "\u001b[32mYOU WON!\u001b[0m, BRILLIANT SHOOTING CAPTAIN"))
             print(BR * 2)
             play_again()
             break
@@ -372,7 +385,11 @@ def start_game():
             break
         print_board(COMPUTER_GUESS_BOARD)
         if hit_count(COMPUTER_GUESS_BOARD) == 17:
-            print(C("UNLUCKY \u001b[31mYOU LOSE\u001b[0m CAPTAIN, WE WILL GET THEM\n NEXT TIME"))
+            print(
+                C(
+                    " " * 10 + "UNLUCKY \u001b[31mYOU LOSE\u001b[0m CAPTAIN, WE WILL GET THEM\n NEXT TIME"
+                )
+            )
             print(BR * 2)
             play_again()
             break
