@@ -222,7 +222,7 @@ The developer ran into several issues during the development of the website, wit
 [Back to top ⇧](#)
 
 ## Testing
-### Testing 
+
 Due to the nature of the project, testing has been implemented throughout the entire project mainly debugging through running the program in the terminal as well as debugging using the python debugger. This is shown by commits of refactoring code.
 Sections of code where developed before implementation to make sure it worked and also where run through the PEP8 validator.
 Tested with invalid inputs: Such as using Type Errors and Value Errors, string instead of integers, out of bound inputs, same input twice.
