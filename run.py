@@ -119,7 +119,7 @@ BOTH OF YOU CANT SEE WHERE TO"
 
 def name_input():
     # The name_input function takes input from the user and stores it in a variable that can be used further into the program
-    print(BR * 10)
+    print(BR * 9)
     print(C("WHAT SHALL YOU BE KNOWN BY CAPTAIN?"))
     while True:
         player_name = input(C("PLEASE ENTER A NAME:\n")).upper()
@@ -357,7 +357,7 @@ def start_game():
     """
     Start game function
     """
-    print(BR * 10)
+    print(BR * 9)
     start_key = input(C("PRESS P TO START GAME: \n")).upper()
     while start_key != "P":
         start_key = input(C("PRESS P TO START GAME: \n")).upper()
@@ -395,7 +395,7 @@ def start_game():
         if hit_count(COMPUTER_GUESS_BOARD) == 17:
             print(
                 C(
-                    " " * 10 + "UNLUCKY \u001b[31mYOU LOSE\u001b[0m CAPTAIN, WE WILL GET THEM\n NEXT TIME"
+                    "UNLUCKY \u001b[31mYOU LOSE\u001b[0m CAPTAIN, WE WILL GET THEM\n NEXT TIME"
                 )
             )
             print(BR * 2)
@@ -415,7 +415,7 @@ def play_again():
         if answer == "Y":
             print(PHASE)
             time.sleep(2)
-            start_game()
+            name_input()
         elif answer == "N":
             print(" ")
             print(C("GOODBYE!, SEE YOU SOON CAPTAIN"))
