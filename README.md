@@ -139,8 +139,8 @@ The board class also runs functions such as the place ship function so the playe
     - It also contains the instructions in how to play the game.
     - The player is then prompted for name input, which complies to the validation checks listed. Input is repeated until a valid name is entered.
 
-![Welcome message](/assets/readme_files/battleship-home-screen.png)
-![Instructions](/assets/readme_files/battleships-instructions.png)
+![Welcome message](/assets/readme_files/battleship-homescreen.png)
+![Instructions](/assets/readme_files/battleship-instructions.png)
 ![Name input](/assets/readme_files/battleship-name.png)
 ![Start game](/assets/readme_files/battleship-start-game.png)
 
@@ -183,6 +183,7 @@ The board class also runs functions such as the place ship function so the playe
     - If the user inputs with a "y" then the game is started from the beginning, else the player is told goodbye and the program ends.
 
 ![Result](/assets/readme_files/result.png)
+![Result](/assets/readme_files/result-lose.png)
 ![End game](/assets/readme_files/end-game.png)
 
 ### Features to Implement in the future
