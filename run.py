@@ -74,7 +74,7 @@ def welcome_message():
 
 def instructions():
     print(BR * 1)
-    print(C("INSTRUCTIONS: \n"))
+    print(C("  INSTRUCTIONS\n"))
     print(PHASE)
     print(
         C(
