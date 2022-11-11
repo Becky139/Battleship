@@ -73,9 +73,9 @@ def welcome_message():
 
 
 def instructions():
-    print(BR * 2)
+    print(BR * 1)
     print(C("INSTRUCTIONS: \n"))
-    PHASE = "=" * 80
+    print(PHASE)
     print(
         C(
             "THE FIRST PLAYER TO GET A HIT COUNT OF 17 HITS DESTROYING ALL ENEMY \
