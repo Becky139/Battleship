@@ -357,6 +357,7 @@ def start_game():
     """
     Start game function
     """
+    print(BR * 10)
     start_key = input(C("PRESS P TO START GAME: \n")).upper()
     while start_key != "P":
         start_key = input(C("PRESS P TO START GAME: \n")).upper()
