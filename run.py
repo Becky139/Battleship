@@ -73,7 +73,9 @@ def welcome_message():
 
 
 def instructions():
+    print(BR * 2)
     print(C("INSTRUCTIONS: \n"))
+    PHASE = "=" * 80
     print(
         C(
             "THE FIRST PLAYER TO GET A HIT COUNT OF 17 HITS DESTROYING ALL ENEMY \
@@ -338,11 +340,13 @@ def turn(board):
             board[row][column] = "X"
             print(C(" " * 10 + "\u001b[33m WE ARE HIT, FIRE BACK!\u001b[0m"))
             print(BR * 2)
+            print(PHASE)
             print(C("COMPUTERS BOARD\n"))
         else:
             board[row][column] = "0"
             print(C(" " * 10 + "\u001b[33m THE COMPUTER MISSED, PHEW...\u001b[0m\n"))
             print(BR * 2)
+            print(PHASE)
             print(C("COMPUTERS BOARD\n"))
 
 
