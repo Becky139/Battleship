@@ -119,6 +119,7 @@ BOTH OF YOU CANT SEE WHERE TO"
 
 def name_input():
     # The name_input function takes input from the user and stores it in a variable that can be used further into the program
+    print(BR * 10)
     print(C("WHAT SHALL YOU BE KNOWN BY CAPTAIN?"))
     while True:
         player_name = input(C("PLEASE ENTER A NAME:\n")).upper()
