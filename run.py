@@ -402,12 +402,13 @@ def play_again():
     """
     Asks the player if they want to play again or quit
     """
-    print(C("WOULD YOU LIKE TO PLAY AGAIN?\n"))
+    print(C("THANK YOU FOR PLAYING BATTLESHIPS\n"))
     answer = input(C("ENTER Y OR N: \n")).upper()
     print(" ")
     while True:
         if answer == "Y":
             print(PHASE)
+            clear_console()
             time.sleep(2)
             name_input()
         elif answer == "N":
