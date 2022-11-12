@@ -140,7 +140,7 @@ The board class also runs functions such as the place ship function so the playe
     - The player is then prompted for name input, which complies to the validation checks listed. Input is repeated until a valid name is entered.
 
 ![Welcome message](/assets/readme_files/battleship-homescreen.png)
-![Instructions](/assets/readme_files/battleship-instructions.png)
+![Instructions](/assets/readme_files/battleship-instrutions.png)
 ![Name input](/assets/readme_files/battleship-name.png)
 ![Start game](/assets/readme_files/battleship-start-game.png)
 
