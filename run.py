@@ -56,7 +56,6 @@ def welcome_message():
     print(C("SHIPS WINS"))
     print(BR)
     print(C("MENU:"))
-    print(BR)
     print(C("1. Play"))
     print(C("2. Instrutions"))
     user_input = input(" " * 40).strip()
