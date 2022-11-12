@@ -52,12 +52,10 @@ def welcome_message():
     # Welcome Message
     print(C("Welcome To Battleships!\n"))
     print(C("THE BOARD IS A GRID OF 8x8 WITH FIVE SHIPS TO SINK"))
-    print(
-        C(
-            "EACH PLAYER HAS 17 LIVES, THE FIRST TO STRIKE 17 BLOWS TO THE ENEMY'S SHIPS WINS"
-        )
-    )
-    print(C("MENU"))
+    print(C("EACH PLAYER HAS 17 LIVES, THE FIRST TO STRIKE 17 BLOWS TO THE ENEMY'S"))
+    print(C("SHIPS WINS"))
+    print(BR)
+    print(C("MENU:"))
     print(BR)
     print(C("1. Play"))
     print(C("2. Instrutions"))
