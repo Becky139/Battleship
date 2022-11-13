@@ -201,6 +201,8 @@ The developer ran into several issues during the development of the website, wit
 - Solved Bugs
     - A bug I came across was the players error message for when placing a ship which overlaps over existing ships or doesn’t fit the board was being printed when it was the computers turn to place its ships. I fixed it by using a for loop in the players turn of the place ship function to print the message therefore no message would be printed if the computers ship overlapped or did not fit the board. 
 
+    - A bug was found when replaying the game the board was not clearing the ships from the previous game. I fixed this by adding a reset funtion this clears the board so the game can be played again without exiting and restarting the app.
+
 - Remaining Bugs
     - No bugs remaining.
 
