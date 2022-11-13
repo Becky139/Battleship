@@ -33,8 +33,15 @@ def clear_console():
     # https://stackoverflow.com/questions/2084508/clear-terminal-in-python
     os.system("cls" if os.name == "nt" else "clear")
 
+
 def restart():
+    """
+    Restarts game to clear the board
+    """
+    # This line is credited to
+    # https://stackoverflow.com/questions/62248430/restart-function-in-python
     os.execl(sys.executable, sys.executable, *sys.argv)
+
 
 def welcome_message():
     clear_console()
@@ -250,55 +257,106 @@ def user_input(place_ship):
     if place_ship == True:
         while True:
             try:
-                orientation = input(C(" " * 10 +"\u001b[33m Enter orientation (H or V):\u001b[0m")).upper()
+                orientation = input(
+                    C(" " * 10 + "\u001b[33m Enter orientation (H or V):\u001b[0m")
+                ).upper()
                 if orientation == "H" or orientation == "V":
                     break
                 else:
                     raise ValueError
             except ValueError:
-                print(C(" " * 10 + "\u001b[33m Please enter a valid orientaion (H or V)\u001b[0m"))
+                print(
+                    C(
+                        " " * 10
+                        + "\u001b[33m Please enter a valid orientaion (H or V)\u001b[0m"
+                    )
+                )
         while True:
             try:
-                row = input(C(" " * 10 + "\u001b[33m Enter the row of the ship 1-8:\u001b[0m"))
+                row = input(
+                    C(" " * 10 + "\u001b[33m Enter the row of the ship 1-8:\u001b[0m")
+                )
                 if row in "12345678":
                     row = int(row) - 1
                     break
                 else:
                     raise ValueError
             except ValueError:
-                print(C(" " * 10 + "\u001b[33m Please enter a valid letter between 1-8\u001b[0m"))
+                print(
+                    C(
+                        " " * 10
+                        + "\u001b[33m Please enter a valid letter between 1-8\u001b[0m"
+                    )
+                )
         while True:
             try:
-                column = input(C(" " * 10 + "\u001b[33m Enter the column of the ship A-H:\u001b[0m")).upper()
+                column = input(
+                    C(
+                        " " * 10
+                        + "\u001b[33m Enter the column of the ship A-H:\u001b[0m"
+                    )
+                ).upper()
                 if column not in "ABCDEFGH":
-                    print(C(" " * 10 + "\u001b[33m Please enter a valid letter between A-H\u001b[0m"))
+                    print(
+                        C(
+                            " " * 10
+                            + "\u001b[33m Please enter a valid letter between A-H\u001b[0m"
+                        )
+                    )
                 else:
                     column = letters_conversion[column]
                     break
             except KeyError:
-                print(C(" " * 10 + "\u001b[33m Please enter a valid letter between A-H\u001b[0m"))
+                print(
+                    C(
+                        " " * 10
+                        + "\u001b[33m Please enter a valid letter between A-H\u001b[0m"
+                    )
+                )
         return row, column, orientation
     else:
         while True:
             try:
-                row = input(C(" " * 10 + "\u001b[33m Enter the row of the ship 1-8:\u001b[0m"))
+                row = input(
+                    C(" " * 10 + "\u001b[33m Enter the row of the ship 1-8:\u001b[0m")
+                )
                 if row in "12345678":
                     row = int(row) - 1
                     break
                 else:
                     raise ValueError
             except ValueError:
-                print(C(" " * 10 + "\u001b[33m Please enter a valid letter between 1-8\u001b[0m"))
+                print(
+                    C(
+                        " " * 10
+                        + "\u001b[33m Please enter a valid letter between 1-8\u001b[0m"
+                    )
+                )
         while True:
             try:
-                column = input(C(" " * 10 + "\u001b[33m Enter the column of the ship A-H:\u001b[0m")).upper()
+                column = input(
+                    C(
+                        " " * 10
+                        + "\u001b[33m Enter the column of the ship A-H:\u001b[0m"
+                    )
+                ).upper()
                 if column not in "ABCDEFGH":
-                    print(C(" " * 10 + "\u001b[33m Please enter a valid letter between A-H\u001b[0m"))
+                    print(
+                        C(
+                            " " * 10
+                            + "\u001b[33m Please enter a valid letter between A-H\u001b[0m"
+                        )
+                    )
                 else:
                     column = letters_conversion[column]
                     break
             except KeyError:
-                print(C(" " * 10 + "\u001b[33m Please enter a valid letter between A-H\u001b[0m"))
+                print(
+                    C(
+                        " " * 10
+                        + "\u001b[33m Please enter a valid letter between A-H\u001b[0m"
+                    )
+                )
         return row, column
 
 
@@ -333,7 +391,12 @@ def turn(board):
         else:
             board[row][column] = "0"
             print(BR * 1)
-            print(C(" " * 10 + "\u001b[31m WE MISSED, WE WILL GET THEM ON THE NEXT SHOT\u001b[0m"))
+            print(
+                C(
+                    " " * 10
+                    + "\u001b[31m WE MISSED, WE WILL GET THEM ON THE NEXT SHOT\u001b[0m"
+                )
+            )
             print(BR * 2)
     else:
         row, column = random.randint(0, 7), random.randint(0, 7)
@@ -378,13 +441,20 @@ def start_game():
         # Player turn
         while True:
             print(PHASE)
-            print(C(" " * 10 + "\u001b[33m GUESS A BATTLESHIP LOCATION CAPTAIN!\n\u001b[0m"))
+            print(
+                C(
+                    " " * 10
+                    + "\u001b[33m GUESS A BATTLESHIP LOCATION CAPTAIN!\n\u001b[0m"
+                )
+            )
             print_board(PLAYER_GUESS_BOARD)
             turn(PLAYER_GUESS_BOARD)
             time.sleep(2)
             break
         if hit_count(PLAYER_GUESS_BOARD) == 17:
-            print(C(" " * 10 + "\u001b[32mYOU WON!\u001b[0m, BRILLIANT SHOOTING CAPTAIN"))
+            print(
+                C(" " * 10 + "\u001b[32mYOU WON!\u001b[0m, BRILLIANT SHOOTING CAPTAIN")
+            )
             print(BR * 2)
             play_again()
             break
@@ -396,29 +466,35 @@ def start_game():
         print_board(COMPUTER_GUESS_BOARD)
         if hit_count(COMPUTER_GUESS_BOARD) == 17:
             print(BR * 2)
-            print(C(" " * 5 +"UNLUCKY \u001b[31mYOU LOSE\u001b[0m CAPTAIN, WE WILL GET THEM NEXT TIME"))
+            print(
+                C(
+                    " " * 5
+                    + "UNLUCKY \u001b[31mYOU LOSE\u001b[0m CAPTAIN, WE WILL GET THEM NEXT TIME"
+                )
+            )
             print(BR * 2)
             play_again()
             break
+
 
 def play_again():
     """
     Asks the player if they want to play again or quit
     """
     print(C("THANK YOU FOR PLAYING BATTLESHIP\n"))
-    print(' ')
-    print(C('GOODBYE!, SEE YOU SOON CAPTAIN'))
-    print(' ')
+    print(" ")
+    print(C("GOODBYE!, SEE YOU SOON CAPTAIN"))
+    print(" ")
     time.sleep(10)
     print(PHASE)
     restart()
     welcome_message()
-            
-            
-        
+
+
 if __name__ == "__main__":
     welcome_message()
     name_input()
     start_game()
     play_again()
+
     

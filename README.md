@@ -177,10 +177,10 @@ The board class also runs functions such as the place ship function so the playe
 
 ![Game play display](/assets/readme_files/play-game-display.png)
 
-- Play Again
+- Reset
     - Once all the conditions of an end game have been met, which is a player either computer or user has hit the total hit count of 17, the turn sequence is broken out off, with a win or lose message being displayed.
-    - The player is them prompted to play again, input validation is used here to ensure a Y or N is entered.
-    - If the user inputs with a "y" then the game is started from the beginning, else the player is told goodbye and the program ends.
+    - The Game will then show a thanks for playing message and after 10 seconds reset and go back to the welcome page where the user can choose to play again or exit.
+   
 
 ![Result](/assets/readme_files/result.png)
 ![Result](/assets/readme_files/result-lose.png)
