@@ -6,10 +6,6 @@ import os
 import sys
 
 
-def restart():
-    os.execl(sys.executable, sys.executable, *sys.argv)
-
-
 # Player and computer board variables
 PLAYER_BOARD = [[" "] * 8 for i in range(8)]
 COMPUTER_BOARD = [[" "] * 8 for i in range(8)]
@@ -37,6 +33,8 @@ def clear_console():
     # https://stackoverflow.com/questions/2084508/clear-terminal-in-python
     os.system("cls" if os.name == "nt" else "clear")
 
+def restart():
+    os.execl(sys.executable, sys.executable, *sys.argv)
 
 def welcome_message():
     clear_console()
@@ -407,30 +405,20 @@ def play_again():
     """
     Asks the player if they want to play again or quit
     """
-    print(C("WOULD YOU LIKE TO PLAY AGAIN?, CAPTAIN \n"))
-    answer = input(C("ENTER Y OR N: \n").upper())
+    print(C("THANK YOU FOR PLAYING BATTLESHIP\n"))
     print(' ')
-    while True:
-        if answer == "Y":
-            print(PHASE)
-            time.sleep(2)
-            restart()
-        elif answer == "N":
-            print(' ')
-            print(C('GOODBYE!, SEE YOU SOON CAPTAIN'))
-            print(' ')
-            print(PHASE)
-            restart()
-            return False
-        else:
-            print(' ')
-            print('PLEASE ENTER Y OR N')
-            answer = input('ENTER Y OR N: \n').upper()
-            restart()
+    print(C('GOODBYE!, SEE YOU SOON CAPTAIN'))
+    print(' ')
+    time.sleep(10)
+    print(PHASE)
+    restart()
+    welcome_message()
+            
+            
         
-
 if __name__ == "__main__":
     welcome_message()
     name_input()
     start_game()
     play_again()
+    
