@@ -2,6 +2,10 @@
 import random
 import time
 import os  # credit to stackoverflow.com
+import sys
+
+def restart():
+    os.execl(sys.executable, sys.executable, *sys.argv)
 
 # Player and computer board variables
 PLAYER_BOARD = [[" "] * 8 for i in range(8)]
@@ -396,31 +400,19 @@ def start_game():
             play_again()
             break
 
-
 def play_again():
-
     """
     Asks the player if they want to play again or quit
     """
     print(C("THANK YOU FOR PLAYING BATTLESHIPS\n"))
-    answer = input(C("ENTER Y OR N: \n")).upper()
+    print(BR * 2)
+    print(C("GOODBYE!, SEE YOU SOON CAPTAIN"))
     print(" ")
-    while True:
-        if answer == "Y":
-            print(PHASE)
-            clear_console()
-            time.sleep(2)
-            name_input()
-        elif answer == "N":
-            print(" ")
-            print(C("GOODBYE!, SEE YOU SOON CAPTAIN"))
-            print(" ")
-            print(PHASE)
-            welcome_message()
-        else:
-            print(" ")
-            print(C("PLEASE ENTER Y OR N"))
-            answer = input(C("ENTER Y OR N: \n")).upper()
+    print(PHASE)
+    clear_console()
+    restart()
+    time.sleep(2)
+        
 
 if __name__ == "__main__":
     welcome_message()
