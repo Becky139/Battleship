@@ -2,8 +2,7 @@
 import random
 import time
 import os  # credit to stackoverflow.com
-import os
-import sys
+import sys  # credit to stackoverflow.com
 
 
 # Player and computer board variables
